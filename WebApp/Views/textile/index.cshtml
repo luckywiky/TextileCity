@@ -1,0 +1,447 @@
+﻿@{
+    ViewBag.Title = "ss";
+    Layout = "~/Views/Shared/_Layout.cshtml";   
+}
+@using TextileCity.Entity;
+@{
+    int currentParentID = -1;
+    int currentChildID = -1;
+    if (ViewData["CurrentParentID"] != null)
+    {
+        currentParentID = (int)ViewData["CurrentParentID"];
+    }
+    if (ViewData["CurrentChildID"] != null)
+    {
+        currentChildID = (int)ViewData["CurrentChildID"];
+    }
+}
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        <div class="span4">
+            <div id="category-list" class="mar-r">
+                @{
+                    string currentTab = "fabric";
+                    if (ViewData["CurrentType"] != null)
+                    {
+                        currentTab = ViewData["CurrentType"].ToString();
+                    }
+                }
+                <input value="#@currentTab" id="current-tab" type="hidden" />
+
+                <ul class="nav nav-type nav-pills " id="myTab">
+                    <li><a href="#fabric">面料</a></li>
+                    <li><a href="#accessory">辅料</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane" id="fabric">
+                        @{
+                            if (ViewData["FabricCategories"] != null)
+                            {
+                                CategoryCollection fabrics = ViewData["FabricCategories"] as CategoryCollection;
+                                List<Category> fabricParents = fabrics.ParentCategories;
+                                string cssHeader = "category-header";
+                                string cssActive = "";
+                                foreach (Category parent in fabricParents)
+                                {
+                                    cssHeader = "category-header";
+                            <div class="category-content">
+                                @{
+                                    if (parent.CategoryID == currentParentID)
+                                    {
+                                        cssHeader = "category-header-current";
+                                    }                                   
+                                }
+                                <div class="@cssHeader">
+                                    <a href="/textile/fabric/@parent.CategoryID">@parent.Name</a>
+                                </div>
+                                <ul class="category-list category-pills ">
+                                    @{
+                                    if (parent.CategoryID == currentParentID && currentChildID == -1)
+                                    {
+                                        <li><a class="active" href="/textile/fabric/@parent.CategoryID">全部</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="/textile/fabric/@parent.CategoryID">全部</a></li>
+                                    }
+                                    if (fabrics[parent.CategoryID] != null)
+                                    {
+                                        foreach (Category c in fabrics[parent.CategoryID])
+                                        {
+                                            cssActive = "";
+                                            if (c.CategoryID == currentChildID)
+                                            {
+                                        <li><a class="active" href="/textile/fabric/@c.CategoryID">@c.Name</a></li>
+                                            }
+                                            else
+                                            {
+                                        <li><a  href="/textile/fabric/@c.CategoryID">@c.Name</a></li>
+                                            }
+                                        }
+                                    }
+                                    }
+                                </ul>
+                            </div>
+                                }
+                            }
+                        }
+                    </div>
+                    <div class="tab-pane" id="accessory">
+                        @{
+                            if (ViewData["AccessoryCategories"] != null)
+                            {
+                                CategoryCollection accessories = ViewData["AccessoryCategories"] as CategoryCollection;
+                                List<Category> accessoryParents = accessories.ParentCategories;
+                                string cssHeader = "category-header";
+                                string cssActive = "";
+                                foreach (Category parent in accessoryParents)
+                                {
+                                    cssHeader = "category-header";
+                            <div class="category-content">
+                                @{
+                                    if (parent.CategoryID == currentParentID)
+                                    {
+                                        cssHeader = "category-header-current";
+                                    }                                   
+                                }
+                                <div class="@cssHeader">
+                                    <a href="/textile/accessory/@parent.CategoryID">@parent.Name</a>
+                                </div>
+                                <ul class="category-list category-pills ">
+                                    @{
+                                    if (parent.CategoryID == currentParentID && currentChildID == -1)
+                                    {
+                                        cssActive = "class=\"active\"";
+                                    }
+                                        <li><a href="/textile/accessory/@parent.CategoryID">全部</a></li>
+                                    if (accessories[parent.CategoryID] != null)
+                                    {
+                                        foreach (Category c in accessories[parent.CategoryID])
+                                        {
+                                            cssActive = "";
+                                            if (c.CategoryID == currentChildID)
+                                            {
+                                                cssActive = "class=\"active\"";
+                                            }
+                                        <li><a href="/textile/accessory/@c.CategoryID">@c.Name</a></li>
+                                        }
+                                    }
+                                    }
+                                </ul>
+                            </div>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+
+
+                <!--/.well -->
+            </div>
+        </div>
+        <!--/span-->
+
+        <div class="span6">
+            <ul class="breadcrumb mar-r10">
+                <li>
+                    <a href="#">Home</a> <span class="divider">/</span>
+                </li>
+                <li>
+                    <a href="#">Library</a> <span class="divider">/</span>
+                </li>
+                <li class="active">Data</li>
+            </ul>
+
+            <ul class="thumbnails goods-list ">
+                <li class="img-first">
+                    <div>
+                        <a class="thumbnail ">
+                            <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt=""></a>
+
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <a class="thumbnail">
+                            <img class="img" src="http://www.baidu.com/img/baidu_sylogo1.gif" alt=""></a>
+
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <a class="thumbnail ">
+                            <img class="img" src="http://www.baidu.com/img/baidu_sylogo1.gif" alt=""></a>
+                        <div>
+
+                        </div>
+                    </div>
+                    
+                </li>
+                <li class="img-last">
+                    <div class="thumbnail">
+                        <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
+                        <h3>Thumbnail label</h3>
+                        <p>Thumbnail caption...</p>
+                    </div>
+                </li>
+
+                <li class="img-first">
+                    <div>
+                        <a class="thumbnail ">
+                            <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt=""></a>
+
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <a class="thumbnail">
+                            <img class="img" src="http://www.baidu.com/img/baidu_sylogo1.gif" alt=""></a>
+
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <a class="thumbnail ">
+                            <img class="img" src="http://www.baidu.com/img/baidu_sylogo1.gif" alt=""></a>
+
+                    </div>
+                    <h3>Thumbnail label</h3>
+                    <p>Thumbnail caption...</p>
+                </li>
+                <li class="img-last">
+                    <div class="thumbnail">
+                        <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
+                        <h3>Thumbnail label</h3>
+                        <p>Thumbnail caption...</p>
+                    </div>
+                </li>
+                <li class="img-first">
+                    <div>
+                        <a class="thumbnail ">
+                            <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt=""></a>
+
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <a class="thumbnail">
+                            <img class="img" src="http://www.baidu.com/img/baidu_sylogo1.gif" alt=""></a>
+
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <a class="thumbnail ">
+                            <img class="img" src="http://www.baidu.com/img/baidu_sylogo1.gif" alt=""></a>
+
+                    </div>
+                    <h3>Thumbnail label</h3>
+                    <p>Thumbnail caption...</p>
+                </li>
+                <li class="img-last">
+                    <div class="thumbnail">
+                        <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
+                        <h3>Thumbnail label</h3>
+                        <p>Thumbnail caption...</p>
+                    </div>
+                </li>
+                <li class="img-first">
+                    <div>
+                        <a class="thumbnail ">
+                            <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt=""></a>
+
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <a class="thumbnail">
+                            <img class="img" src="http://www.baidu.com/img/baidu_sylogo1.gif" alt=""></a>
+
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <a class="thumbnail ">
+                            <img class="img" src="http://www.baidu.com/img/baidu_sylogo1.gif" alt=""></a>
+
+                    </div>
+                    <h3>Thumbnail label</h3>
+                    <p>Thumbnail caption...</p>
+                </li>
+                <li class="img-last">
+                    <div class="thumbnail">
+                        <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
+                        <h3>Thumbnail label</h3>
+                        <p>Thumbnail caption...</p>
+                    </div>
+                </li>
+                <li class="img-first">
+                    <div>
+                        <a class="thumbnail ">
+                            <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt=""></a>
+
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <a class="thumbnail">
+                            <img class="img" src="http://www.baidu.com/img/baidu_sylogo1.gif" alt=""></a>
+
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <a class="thumbnail ">
+                            <img class="img" src="http://www.baidu.com/img/baidu_sylogo1.gif" alt=""></a>
+
+                    </div>
+                    <h3>Thumbnail label</h3>
+                    <p>Thumbnail caption...</p>
+                </li>
+                <li class="img-last">
+                    <div class="thumbnail">
+                        <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
+                        <h3>Thumbnail label</h3>
+                        <p>Thumbnail caption...</p>
+                    </div>
+                </li>
+
+            </ul>
+
+            <ul class="thumbnails">
+                <li class="span3">
+                    <div>
+                        <a class="thumbnail ">
+                            <img src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt=""></a>
+
+                    </div>
+                </li>
+                <li class="span3">
+                    <div>
+                        <a class="thumbnail ">
+                            <img src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt=""></a>
+
+                    </div>
+                    <h3>Thumbnail label</h3>
+                    <p>Thumbnail caption...</p>
+                </li>
+                <li class="span3">
+                    <div class="thumbnail">
+                        <img src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
+                        <h3>Thumbnail label</h3>
+                        <p>Thumbnail caption...</p>
+                    </div>
+                </li>
+                <li class="span3">
+                    <div class="thumbnail">
+                        <img data-src="holder.js/300x200" alt="">
+                        <h3>Thumbnail label</h3>
+                        <p>Thumbnail caption...</p>
+                    </div>
+                </li>
+
+            </ul>
+            <ul class="thumbnails">
+                <li class="span3">
+                    <div>
+                        <a class="thumbnail ">
+                            <img src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt=""></a>
+
+                    </div>
+                </li>
+                <li class="span3">
+                    <div>
+                        <a class="thumbnail ">
+                            <img src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt=""></a>
+
+                    </div>
+                    <h3>Thumbnail label</h3>
+                    <p>Thumbnail caption...</p>
+                </li>
+                <li class="span3">
+                    <div class="thumbnail">
+                        <img src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
+                        <h3>Thumbnail label</h3>
+                        <p>Thumbnail caption...</p>
+                    </div>
+                </li>
+                <li class="span3">
+                    <div class="thumbnail">
+                        <img data-src="holder.js/300x200" alt="">
+                        <h3>Thumbnail label</h3>
+                        <p>Thumbnail caption...</p>
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <!--/span-->
+        <div class="span2 ">
+            <div class="tools">
+                <label for="search">搜索</label>
+                <div class="input-append ">
+                    <input class="span10" placeholder="请输入你要找的面料、辅料" id="search" size="16" type="text">
+                    <a class="btn" href="#"><i class=" icon-search"></i></a>
+                </div>
+                <div class="tools">
+                    <div class="accordion" id="accordion2">
+                        <div class="accordion-group tools">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Collapsible Group Item #1
+                                </a>
+                            </div>
+                            <div id="collapseOne" class="accordion-body collapse in ">
+                                <div class="accordion-inner">
+                                    Anim pariatur cliche...
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-group tools">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">Collapsible Group Item #2
+                                </a>
+                            </div>
+                            <div id="collapseTwo" class="accordion-body collapse">
+                                <div class="accordion-inner">
+                                    Anim pariatur cliche...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--/row-->
+
+</div>
+<!--/.fluid-container-->
+
+<script type="text/javascript" src="js/slimScroll.min.js"></script>
+<script>
+    $(function () {
+        var current_tab = $('#current-tab').val();
+        $('#myTab a[href="' + current_tab + '"]').tab('show');
+        $('#myTab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+            $('#current-tab').val($(this).attr("href"));
+            $('#category-list').slimScroll();
+        });
+
+        $('#category-list').slimScroll({
+            height: '780px',
+            position: 'right',
+            color: '#eee',
+            railVisible: true,
+            alwaysVisible: false,
+            allowPageScroll: false
+        });
+    });
+
+</script>
+

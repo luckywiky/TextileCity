@@ -1,0 +1,218 @@
+.news_list .news_item {
+    color: #222222;
+    font-weight: bold;
+    font-size: 14px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    text-overflow: ellipsis !important;
+    overflow: hidden;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 0;
+}
+
+.news_list {
+}
+
+    .news_list span {
+        font-size: 14px;
+        float: right;
+        padding-right: 8px;
+        font-weight: normal;
+    }
+
+    .news_list a {
+        text-decoration: none;
+    }
+
+.center-min {
+    min-width: 800px;
+}
+
+.main_img {
+    height: 450px;
+    width: 600px;
+    margin-bottom: 20px;
+}
+
+.list_img {
+    margin-bottom: 10px;
+}
+
+.category-header {
+    padding-bottom: 9px;
+    margin: 20px 0 5px 0;
+    border-bottom: 1px solid #666;
+}
+
+    .category-header a {
+        font-size: 18px;
+        color: #890000;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+        .category-header a:hover {
+            color: #900;
+        }
+
+.category-header-current {
+    padding-bottom: 19px;
+    margin: 20px 0 5px 0;
+    border-bottom: 1px solid #666;
+}
+
+    .category-header-current a:hover {
+        text-decoration: none;
+    }
+
+    .category-header-current a {
+        text-decoration: none;
+        padding: 8px 12px;
+        margin-right: 2px;
+        line-height: 14px;
+        color: #ffffff;
+        background-color: #890000;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border-radius: 2px;
+    }
+
+.category-content {
+    margin-bottom: 45px;
+}
+
+
+.category-list {
+    margin-bottom: 20px;
+    margin-left: 0;
+    list-style: none;
+}
+
+    .category-list li {
+        display: block;
+    }
+
+    .category-list > li > a:hover {
+        text-decoration: none;
+    }
+
+.category-pills > li {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.category-pills {
+    *zoom: 1;
+}
+
+
+    .category-pills:before,
+    .category-pills:after {
+        display: table;
+        line-height: 0;
+        content: "";
+    }
+
+
+    .category-pills:after {
+        clear: both;
+    }
+
+
+
+
+
+    .category-pills li {
+        margin-right: 5px;
+        width: 120px;
+        line-height: 14px;
+        float: left;
+    }
+
+    .category-pills .first {
+        padding-left: 0px;
+    }
+
+    .category-pills li a {
+        font-size: 14px;
+        color: #CCCCCC;
+        padding: 5px 0;
+        border-bottom: 4px solid #222;
+    }
+
+        .category-pills li a:hover {
+            border-bottom: 4px solid #890000;
+        }
+
+    .category-pills .active {
+        color: #890000;
+        border-bottom: 4px solid #890000;
+    }
+
+.assd {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.right-box {
+}
+
+.tools {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.mar-r10 {
+    margin-right: 15px;
+}
+
+.mar-r {
+    margin-right: 10px;
+}
+
+.breadcrumb a {
+    color: #890000;
+}
+
+    .breadcrumb a:hover {
+        color: #DA4F49;
+    }
+
+.img {
+    width: 135px;
+    height: 115px;
+}
+
+.img-first {
+}
+
+.goods-list li {
+    margin-left: 0 !important;
+    margin-right: 15px !important;
+}
+
+.col_first {
+    margin-left: 0%;
+}
+
+.col_last {
+    margin-right: 0% !important;
+}
+
+
+.nav-type a {
+    font-size: 16px;
+    font-weight: bold;
+    color: #890000;
+    padding: 10px 25px !important;
+}
+
+.nav-type li {
+    margin-right: 35px;
+}
