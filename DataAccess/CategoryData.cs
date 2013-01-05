@@ -168,6 +168,29 @@ namespace TextileCity.DataAccess
 			}
 		}
 
+        public TextileCity.Entity.Category GetTopParentModel(string categoryType)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select id,parentid,name,type,order_index from category ");
+            strSql.Append(" where type=?type and parentid = 0 order by order_index asc limit 0,1  ");
+            MySqlParameter[] parameters = {
+					new MySqlParameter("?type", MySqlDbType.Enum)
+			};
+
+            parameters[0].Value = categoryType;
+
+            TextileCity.Entity.Category model = new TextileCity.Entity.Category();
+            DataSet ds = MysqlHelper.ExecuteDataSet(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
 
 		/// <summary>
 		/// 得到一个对象实体
@@ -239,12 +262,12 @@ namespace TextileCity.DataAccess
                 case CategoryType.All:
                     break;
                 case CategoryType.Fabric:
-                     where += string.Format(" and type = 1 ");    
-                //where += string.Format(" and type = '{0}' ", CategoryType.Fabric);
+                   //  where += string.Format(" and type = 1 ");    
+                where += string.Format(" and type = '{0}' ", CategoryType.Fabric);
                     break;
                 case CategoryType.Accessory:
-                    where += string.Format(" and type = 2 ");
-                    //where += string.Format(" and type = '{0}' ", CategoryType.Accessory);
+                   // where += string.Format(" and type = 2 ");
+                    where += string.Format(" and type = '{0}' ", CategoryType.Accessory);
                     break;
                 default:
                     break;
@@ -268,12 +291,12 @@ namespace TextileCity.DataAccess
                 case CategoryType.All:
                     break;
                 case CategoryType.Fabric:
-                    where += string.Format(" and category.type = 1 ", CategoryType.Fabric);
-                    //where += string.Format(" and category.type = '{0}' ", CategoryType.Fabric);
+                   // where += string.Format(" and category.type = 1 ", CategoryType.Fabric);
+                    where += string.Format(" and category.type = '{0}' ", CategoryType.Fabric);
                     break;
                 case CategoryType.Accessory:
-                    where += string.Format(" and category.type = 2 ", CategoryType.Fabric);
-                    //where += string.Format(" and category.type = '{0}' ", CategoryType.Accessory);
+                    //where += string.Format(" and category.type = 2 ", CategoryType.Fabric);
+                    where += string.Format(" and category.type = '{0}' ", CategoryType.Accessory);
                     break;
                 default:
                     break;

@@ -42,6 +42,7 @@
     <Compile Include="Category.cs" />
     <Compile Include="CategoryCollection.cs" />
     <Compile Include="CategoryType.cs" />
+    <Compile Include="Material.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

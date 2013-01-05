@@ -8,8 +8,8 @@ namespace TextileCity.Entity
 {
     public abstract class CategoryType
     {
-        public  const string Fabric = "面料";
-        public  const string Accessory = "辅料";
+        public const string Fabric = "面料";
+        public const string Accessory = "辅料";
         public  const string All = "";
 
     }

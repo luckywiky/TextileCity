@@ -63,7 +63,10 @@ namespace TextileCity.Operation
 			
 			return dal.GetModel(id);
 		}
-
+        public TextileCity.Entity.Category GetTopParentModel(string categoryType)
+        {
+            return dal.GetTopParentModel(categoryType);
+        }
 		/// <summary>
 		/// 得到一个对象实体，从缓存中
 		/// </summary>
@@ -132,6 +135,17 @@ namespace TextileCity.Operation
 		{
 			return GetList("");
 		}
+
+        public Category FirstFabricParent()
+        {
+            return GetTopParentModel(CategoryType.Fabric);
+        }
+
+        public Category FirstAccessoryParent()
+        {
+            return GetTopParentModel(CategoryType.Accessory);
+        }
+
         public List<Category> GetAllParents()
         {
             List<Category> parents = new List<Category>();
@@ -142,6 +156,8 @@ namespace TextileCity.Operation
             }
             return parents;
         }
+
+
 
         public List<Category> GetFabricParents()
         {

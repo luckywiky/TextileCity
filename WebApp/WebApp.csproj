@@ -214,6 +214,8 @@
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery-ui.js" />
     <Content Include="js\jquery.js" />
+    <Content Include="js\list-pager.js" />
+    <Content Include="js\list.js" />
     <Content Include="js\slimScroll.min.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -242,7 +244,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\textile\index.cshtml" />
-    <Content Include="Views\textile\View1.cshtml" />
+    <Content Include="Views\textile\list.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
