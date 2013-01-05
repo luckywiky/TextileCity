@@ -90,10 +90,25 @@ namespace TextileCity.Operation
         {
             count = 0;
             List<Material> materials = new List<Material>();
-            DataSet ds = dal.GetMaterialsMin(categoryID, page, Common.TextileConfig.MaterialPageSize, out count);
-            if (ds != null && ds.Tables.Count > 0)
+            DataSet ds = null;
+            Category category = new Category();
+            CategoryOperation cop = new CategoryOperation();
+            category = cop.GetModel(categoryID);
+            if (category != null)
             {
-                materials = DataTableToList(ds.Tables[0]);
+                if (category.ParentID == 0)
+                {
+                    List<int> ids = cop.GetChildIdList(category.CategoryID);
+                    ds = dal.GetMaterialsMin(ids, page, Common.TextileConfig.MaterialPageSize, out count);
+                }
+                else
+                {
+                    ds = dal.GetMaterialsMin(categoryID, page, Common.TextileConfig.MaterialPageSize, out count);
+                }
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    materials = DataTableToList(ds.Tables[0]);
+                }
             }
             return materials;
         }

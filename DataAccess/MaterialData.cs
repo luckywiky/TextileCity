@@ -259,7 +259,7 @@ namespace TextileCity.DataAccess
         public DataSet GetMaterialsMin(int categoryID, int pageIndex, int pageSize, out int count)
         {
             count = 0;
-            StringBuilder strSql = new StringBuilder();
+            StringBuilder strSql = new StringBuilder();           
             string strSqlCount = string.Format("select count(id) from material WHERE category_id = {0} ", categoryID);
             strSql.Append("select id,name,main_image ");
             strSql.Append(" FROM material ");
@@ -275,6 +275,39 @@ namespace TextileCity.DataAccess
             if (objCount != null)
             {
                 int.TryParse(objCount.ToString(),out count);
+            }
+            DataSet ds = MysqlHelper.ExecuteDataSet(strSql.ToString());
+            return ds;
+        }
+
+        public DataSet GetMaterialsMin(List<int> categoryIDs, int pageIndex, int pageSize, out int count)
+        {
+            count = 0;
+            StringBuilder strSql = new StringBuilder();
+            string ids = string.Empty;
+            foreach (int cid in categoryIDs)
+            {
+                ids += string.Format("{0},", cid);
+            }
+            if (ids.Length > 0)
+            {
+                ids = ids.Remove(ids.Length - 1, 1);
+            }
+            string strSqlCount = string.Format("select count(id) from material WHERE category_id in ({0}) ", ids);
+            strSql.Append("select id,name,main_image ");
+            strSql.Append(" FROM material ");
+            strSql.AppendFormat(" WHERE category_id in ({0}) ", ids);
+            int offset = 0;
+            if (pageIndex > 1)
+            {
+                offset = (pageIndex - 1) * pageSize;
+            }
+            strSql.AppendFormat(" LIMIT {0},{1} ", offset, pageSize);
+
+            object objCount = MysqlHelper.ExecuteScalar(strSqlCount);
+            if (objCount != null)
+            {
+                int.TryParse(objCount.ToString(), out count);
             }
             DataSet ds = MysqlHelper.ExecuteDataSet(strSql.ToString());
             return ds;

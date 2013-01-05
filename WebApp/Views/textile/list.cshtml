@@ -1,182 +1,65 @@
 ﻿@using TextileCity.Entity;
 @{
-    
+    List<Material> materials = new List<Material>();
+    List<PagerItem> pagerItems = new List<PagerItem>();
+    int categoryID = 1;
+    if (ViewData["CategoryID"] != null)
+    {
+        categoryID = (int)ViewData["CategoryID"];
+    }
+    if (ViewData["Materials"] != null)
+    {
+        materials = ViewData["Materials"] as List<Material>;
+    }
+    if (ViewData["PagerItems"] != null)
+    {
+        pagerItems = ViewData["PagerItems"] as List<PagerItem>;
+    }
+  
 }
 
-<ul class="thumbnails goods-list">
-     <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>   <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>  <li>
-        <div >
-            <a href="~/Views/textile/list" class="thumbnail ">
-                <img class="img" src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                
-            </a>
-          <div class="material-title"> <a href="~/Views/textile/list" class="">地撒大声地</a></div> 
-        </div>
-    </li>
+<ul class="thumbnails goods-list" id="img-list" >
+    @{
+        foreach (Material m in materials)
+        {
+        <li>
+            <div>
+                <a href="/material/@m.MaterialID" class="thumbnail ">
+                    <img class="img" src="@m.MainImage" alt="@m.Name">
+                </a>
+                <div class="material-title"><a href="/material/@m.MaterialID" class="">@m.Name</a></div>
+            </div>
+        </li>
+        }
+    }
 </ul>
- 
+
 <div class="pagination pagination-centered pagination-large" id="list_pager">
     <ul>
-        <li><a href="#">«</a></li>
-        <li class="active">
-            <a href="#">1</a>
-        </li>
-        <li><a href="/textile/list/2">2</a></li>
-        <li><a href="#">@ViewData["Page"].ToString()</a></li>
-        <li><a href="#">@ViewData["Page"].ToString()</a></li>
-        <li><a href="#">»</a></li>
+        @{
+            if (pagerItems.Count > 3)
+            {
+                foreach (PagerItem item in pagerItems)
+                {
+                    if (item.Display)
+                    {
+                        if (item.Active)
+                        {
+            <li class="active"><a>@item.Text</a></li>
+                        }
+                        else
+                        {
+            <li><a href="@string.Format("/list/{0}?page={1}", categoryID, item.Index)">@item.Text</a></li>
+                        }
+                    }
+                    else
+                    {
+            <li class="disabled"><a>@item.Text</a></li>
+                    }
+                }
+            }
+        }
+
     </ul>
 </div>
 <script type="text/javascript" src="/js/list-pager.js"></script>

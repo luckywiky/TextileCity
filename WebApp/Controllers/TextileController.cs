@@ -80,6 +80,7 @@ namespace WebApp.Controllers
                     ViewData["CurrentType"] = type;
                     ViewData["FabricCategories"] = gop.GetFabricCategories();
                     ViewData["AccessoryCategories"] = gop.GetAccessoryCategories();
+                    ViewData["CurrentID"] = id;
                     return View();
                 }
                 catch
@@ -100,9 +101,11 @@ namespace WebApp.Controllers
             MaterialOperation mop = new MaterialOperation();
             List<Material> mateials = new List<Material>();
             mateials = mop.GetMaterialsMin(categoryid, page, out count);
-            ViewData["Page"] = page;
-            ViewData["PageCount"] = count;
+            Pager pager = new Pager(page, count, Common.TextileConfig.MaterialPageSize);
+            ViewData["PagerItems"] = pager.CreatePager();           
             ViewData["Materials"] = mateials;
+            ViewData["CategoryID"] = categoryid;
+            
             return PartialView("list");
         }
     }

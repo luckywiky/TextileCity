@@ -5066,7 +5066,7 @@ input[type="submit"].btn.btn-mini {
 .pagination ul > .disabled > a:hover {
   color: #999999;
   cursor: default;
-  background-color: transparent;
+  background-color: #fff;
 }
 
 .pagination ul > li:first-child > a,

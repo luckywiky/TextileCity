@@ -238,7 +238,32 @@ namespace TextileCity.Operation
             }
             return categories;
         }
+        public List<Category> GetChilds(int parentid)
+        {
+            List<Category> childs = new List<Category>();
+            DataSet ds = dal.GetChilds(parentid);
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                childs = DataTableToList(ds.Tables[0]);
+            }
+            return childs;
+        }
 
+        public List<int> GetChildIdList(int parentid)
+        {
+            List<Category> childs = new List<Category>();
+            List<int> idList = new List<int>();
+            DataSet ds = dal.GetChildIDList(parentid);
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                childs = DataTableToList(ds.Tables[0]);
+            }
+            foreach (Category c in childs)
+            {
+                idList.Add(c.CategoryID);
+            }
+            return idList;
+        }
 		/// <summary>
 		/// 分页获取数据列表
 		/// </summary>

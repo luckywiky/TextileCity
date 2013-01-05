@@ -6,6 +6,8 @@
 @{
     int currentParentID = -1;
     int currentChildID = -1;
+    int currentID = 0;
+    
     string currentTypeName = "面料";
     string currentParentName = string.Empty;
     string currentChildName = string.Empty;
@@ -16,6 +18,10 @@
     if (ViewData["CurrentChildID"] != null)
     {
         currentChildID = (int)ViewData["CurrentChildID"];
+    }
+    if(ViewData["CurrentID"]!=null)
+    {
+        currentID = (int)ViewData["CurrentID"];
     }
 }
 <div class="container-fluid">
@@ -186,10 +192,9 @@
                 }
                 
             </ul>
-            <div id="list_content">
-
-            
-            @{Html.RenderAction("list", new { id = 1 });}
+            <div class="loading" id="loading"><img src="/img/loading-big.gif"/></div>
+            <div id="list_content">           
+            @{Html.RenderAction("list", new { categoryid = currentID });}
            
             </div>
         </div>

@@ -319,9 +319,22 @@ namespace TextileCity.DataAccess
             return MysqlHelper.ExecuteDataSet(sql.ToString());
         }
 
+
+
         public DataSet GetChilds()
         {
             return GetChilds(CategoryType.All);
+        }
+
+        public DataSet GetChildIDList(int parentid)
+        {
+            DataSet dsResult = new DataSet();
+            StringBuilder sql = new StringBuilder();
+            string where = string.Format(" WHERE category.parentid={0} ", parentid);
+            sql.Append("SELECT category.id ");
+            sql.Append(" FROM category  ");         
+            sql.Append(where);           
+            return MysqlHelper.ExecuteDataSet(sql.ToString());
         }
 
 		/// <summary>
