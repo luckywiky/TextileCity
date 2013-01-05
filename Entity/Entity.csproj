@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cart.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="CategoryCollection.cs" />
     <Compile Include="CategoryType.cs" />
