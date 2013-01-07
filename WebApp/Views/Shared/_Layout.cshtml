@@ -24,26 +24,41 @@
 </head>
 
 <body>
-    <div class="navbar navbar-fixed-top">
+    @{
+        TextileCity.Models.NaviCss naviCss = ViewBag.NaviCss;
+    }
+
+    <div class="navbar navbar-fixed-top ">
         <div class="navbar-inner">
-            <div class="nav-container-fluid">
+            <div class="container  p015">
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>
                 <a class="brand" href="#">Project name</a>
-                <div class="nav-collapse">
+                <div class="nav-collapse ">
                     <ul class="nav nav-pills">
-                        <li class="active">
-                            <a href="#">Home</a>
+                        <li class="@naviCss.Index">
+                            <a href="/">首页</a>
                         </li>
-                        <li>
-                            <a href="#about">About</a>
+                        <li class="@naviCss.Fabric">
+                            <a href="/textile/fabric">布料</a>
                         </li>
-                        <li>
-                            <a href="#contact">Contact</a>
+                        <li class="@naviCss.Accessory">
+                            <a href="/textile/accessory">辅料</a>
+                        </li>
+                        <li class="@naviCss.News">
+                            <a href="/news">轻纺城动态</a>
+                        </li>
+                        <li class="@naviCss.About">
+                            <a href="/home/about">关于我们</a>
+                        </li>
+                        <li class="@naviCss.Location">
+                            <a href="/home/location">交通地理</a>
+                        </li>
+                        <li class="@naviCss.Account">
+                            <a href="/account/me">个人中心</a>
                         </li>
                     </ul>
-                    <p class="navbar-text pull-right">
-                        Logged in as <a href="#">username</a>
-                    </p>
+   
+                    @{Html.RenderAction("loginwidget","Account");}
                 </div>
                 <!--/.nav-collapse -->
             </div>

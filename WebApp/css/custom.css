@@ -239,14 +239,538 @@
         overflow: hidden;
         white-space: nowrap;
     }
-.loading{
-    display:none;
+
+.loading {
+    display: none;
+    text-align: center;
+    margin: 200px;
+    padding: 100px;
+    font-size: 18px;
+    vertical-align: middle;
+    color: #890000;
+}
+
+.icon-user-red {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url(../img/user.png);
+    background-repeat: no-repeat;
+    image-orientation: auto;
+    margin-right: 5px;
+}
+
+.icon-user-red {
+    background-position: 0 0;
+}
+
+.divider-vertical-red {
+    height: 22px;
+    margin: 10px 9px;
+    padding: 0;
+    border-left: 1px solid #ad1d28;
+    border-right: 1px solid #971923;
+}
+
+.icon-newspaper-i, .icon-pencil-i, .icon-location-i, .icon-exit-i {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url(../img/sprites.png);
+    background-repeat: no-repeat;
+}
+
+.icon-newspaper-i {
+    background-position: 0 0;
+}
+
+.icon-pencil-i {
+    background-position: -28px 0;
+}
+
+.icon-location-i {
+    background-position: -56px 0;
+}
+
+.icon-exit-i {
+    background-position: -84px 0;
+}
+
+.icon-cart-i {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url(../img/sprites1.png);
+    background-repeat: no-repeat;
+    background-position: -56px 0;
+    margin-right: 5px;
+}
+
+
+.pr5 {
+    padding-right: 5px;
+}
+
+.mar-r30 {
+    margin-right: 30px;
+}
+
+.bgred {
+    background-color: #890000;
+}
+
+.cart {
+    font-size: 14px;
+    color: #890000;
+    text-decoration: none;
+}
+
+    .cart:hover {
+        color: #333;
+        text-decoration: none;
+    }
+
+    .cart span {
+        margin-left: 5px;
+    }
+
+.icon-cart-s {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-image: url(../img/cart.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    margin-right: 5px;
+}
+
+/* -- gallery  begin --*/
+div.content-img { /* The display of content is enabled using jQuery so that the slideshow content won't display unless javascript is enabled. */
+    display: none;
+    width: 620px;
+    height: 403px;
+    margin: 0;
+    padding: 0px;
+    float: left;
+    overflow: hidden;
+}
+
+    div.content-img img {
+        position: relative;
+        z-index: 2;
+    }
+
+    div.content-img a, div.navigation a {
+        text-decoration: none;
+        display: block;
+        position: relative;
+        cursor: pointer;
+    }
+
+        div.content-img a img, div.navigation a img {
+            position: relative;
+            z-index: 1;
+        }
+
+        div.content-img a span, div.navigation a span {
+            display: block;
+            width: 140px;
+            height: 121px;
+            background: #000;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+        }
+
+            div.content-img a span.selected,
+            div.navigation a span.selected {
+                display: none !important;
+            }
+
+        div.content-img a:focus, div.content-img a:hover, div.content-img a:active {
+            text-decoration: underline;
+        }
+
+div.controls-a {
+}
+
+    div.controls-a a {
+        padding: 0px;
+    }
+
+div.ss-controls {
+    float: left;
+    display: none;
+}
+
+div.nav-controls {
+    position: absolute;
+    left: 0px;
+    width: 596px;
+    bottom: 0px;
+    z-index: 1;
+}
+
+    div.nav-controls a.prev {
+        background: url(../img/prevPageArrowWhite.gif) no-repeat 0 0;
+        width: 39px;
+        height: 39px;
+        text-indent: -5000px;
+        position: absolute;
+        bottom: 2px;
+        left: 0;
+        z-index: 11;
+    }
+
+        div.nav-controls a.prev:hover {
+            background: url(../img/prevPageArrowWhite.gif) no-repeat 0 0;
+        }
+
+    div.nav-controls a.next {
+        background: url(../img/nextPageArrowWhite.gif) no-repeat 0 0;
+        width: 39px;
+        height: 39px;
+        text-indent: -5000px;
+        position: absolute;
+        bottom: 2px;
+        right: 0;
+        z-index: 11;
+    }
+
+        div.nav-controls a.next:hover {
+            background: url(../img/nextPageArrowWhite.gif) no-repeat 0 0;
+        }
+
+div.slideshow-container {
+    position: relative;
+    height: 403px; /* This should be set to be at least the height of the largest image in the slideshow */
+    z-index: 1;
+}
+
+div.loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url(images/loader.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 592px;
+    height: 470px; /* This should be set to be at least the height of the largest image in the slideshow */
+}
+
+div.slideshow {
+}
+
+    div.slideshow span.image-wrapper {
+        display: block;
+        width: 620px;
+        height: 403px;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    div.slideshow a.advance-link {
+        display: block;
+        width: 620px;
+        height: 403px; /* This should be set to be at least the height of the largest image in the slideshow */
+        padding: 0;
+        margin: 0;
+    }
+
+        div.slideshow a.advance-link img {
+            padding: 0;
+            margin: 0;
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        div.slideshow a.advance-link:hover, div.slideshow a.advance-link:active, div.slideshow a.advance-link:visited {
+            text-decoration: none;
+        }
+
+    div.slideshow img {
+    }
+
+div.download {
+    float: right;
+}
+
+div.caption-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 596px;
+    height: 151px;
+}
+
+span.image-caption {
+    display: block;
+    position: absolute;
+    width: 596px;
+    height: 151px;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+div.caption {
+    width: 536px;
+    height: 128px;
+    padding: 23px 30px 0 30px;
+    line-height: 18px;
+    font-size: 13px;
+    color: #fff;
+}
+
+    div.caption h5 {
+        line-height: 18px;
+        font-size: 13px;
+        color: #fd003f;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    div.caption h6 {
+        line-height: 18px;
+        font-size: 13px;
+        color: #fff;
+        font-weight: normal;
+        margin: 0 0 18px 0;
+    }
+
+div.image-title {
+}
+
+div.image-desc {
+}
+
+div.navigation {
+}
+
+div#thumbs {
+    width: 320px;
+    height: 403px;
+    overflow: hidden;
+    padding: 0px 0px 0 0;
+}
+
+ul.thumbs {
+    float: right;
+    margin-left: 0;
+    padding: 0;
+    width: 320px;
+    height: auto;
+    overflow: visible;
+}
+
+    ul.thumbs li {
+        height: 121px;
+        float: left;
+        margin: 0 20px 20px 0;
+        overflow: hidden;
+        padding: 0;
+        vertical-align: top;
+    }
+
+        ul.thumbs li img {
+            border: none;
+        }
+
+a.thumb:focus {
+    outline: none;
+}
+
+div.pagination-img {
+    clear: both;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+div.top.pagination-img {
+    display: none;
+}
+
+div.pagination-img div.bottom {
+    display: none;
+}
+
+div.pagination-img a, div.pagination-img span.current, div.pagination-img span.ellipsis {
+    padding: 0 4px;
+    font-weight: bold;
+    color: #fff;
+}
+
+    div.pagination-img a:hover {
+        text-decoration: none;
+        color: #ffeaa8;
+    }
+
+div.pagination-img span.current {
+    color: #ffeaa8;
+}
+
+div.pagination-img span.ellipsis {
+    border: none;
+    padding: 5px 0 3px 2px;
+}
+
+.gallery {
+    padding: 20px 0 26px 20px;
+    background: #fff;
+    -moz-box-shadow: 0px 5px 8px rgba(0,0,0,0.70);
+    box-shadow: 0px 5px 8px rgba(0,0,0,0.70);
+    -webkit-box-shadow: 0px 5px 8px rgba(0,0,0,0.70);
+    box-shadow: 0px 5px 8px rgba(0,0,0,0.70);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.padding {
+    padding: 30px 0px 38px;
+}
+
+.wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.indent-bot {
+    margin-bottom: 20px;
+}
+
+.p3 {
+    margin-bottom: 30px;
+}
+
+.m-980 {
+    min-width: 980px;
+}
+
+.w980 {
+    width: 980px !important;
+    margin-left: auto;
+}
+
+.w310 {
+    min-width: 300px !important;
+}
+
+.left-auto {
+    margin-left: auto;
+}
+
+.content-auto {
+    margin-right: auto;
+    margin-left: auto;
+    min-width: 1280px !important;
+}
+
+.mar-l15 {
+    margin-left: 15px !important;
+}
+
+.mar-l0 {
+    margin-left: 5px !important;
+}
+.p015{
+    padding: 10px 0;
+}
+
+.text-black{
+    color:#000;
+    font-size:16px;
+}
+
+.brand-a div{  
+  border-right: 5px solid #890000;
+}
+.brand-g div{
+     border-right: 5px solid #3ab210 !important;
+}
+
+.par5{
+    padding-right:5px !important;
+}
+
+.navbar .brand-a {
+    display: block;    
+    text-align: left;
+    padding: 10px 20px  0 10px ;
+    padding-right:0;
+    margin-left: -20px;
+    font-size: 20px;
+    font-weight: 200;
+    color: #777777;
+    -webkit-text-shadow: 0 1px 0 #ffffff;
+    text-shadow: 0 1px 0 #ffffff;
+}
+
+
+.navbar .brand-a:hover {
+  text-decoration: none;
+}
+.selected {
+  border: 4px #890000 solid;
+}
+.selected:after {
+  width: 0;
+  height: 0;
+  border-top: 40px solid #890000;
+  border-left: 40px solid transparent;
+  position: absolute;
+  display: block;
+  right: 0;
+  content: ".";
+  top: 0;
+  z-index: 1001;
+}
+.selected:before {
+  position: absolute;
+  content: "\e08a";
+  color: #fff;
+  right: 4px;
+  font-family: iconFont;
+  z-index: 1002;
+}
+.login-form{
+    color:#111;
+    font-size:16px;
+    line-height:24px;
+    margin-top:40px;
+}
+.forgot{
+     text-decoration:none;
+    font-size:14px;   
+    margin-left:25px;
+    padding-left:5px;   
+     
+}
+.login-form a:hover{
+     text-decoration:none;
+}
+.no-register{
+    
+     font-size:14px;   
+    margin-right:25px;
+    padding-right:5px;  
+    float:right; 
+}
+.err-msg{
+   
     text-align:center;
-    margin:200px;
-    padding:100px;
-    
-    font-size:18px;
-    vertical-align:middle;
-    
-    color:#890000;
+    color:#890000; 
+}
+.mar-b0{
+    margin-bottom:0 !important;
+}
+.mar-top0{
+    margin-top:0 !important;
 }

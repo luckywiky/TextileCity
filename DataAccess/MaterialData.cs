@@ -26,9 +26,9 @@ namespace TextileCity.DataAccess
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select count(1) from material");
-            strSql.Append(" where id=@id");
+            strSql.Append(" where id=?id");
             MySqlParameter[] parameters = {
-					new MySqlParameter("@id", MySqlDbType.Int32)
+					new MySqlParameter("?id", MySqlDbType.Int32)
 			};
             parameters[0].Value = id;
 
@@ -45,18 +45,18 @@ namespace TextileCity.DataAccess
             strSql.Append("insert into material(");
             strSql.Append("category_id,type,name,price,price_high,price_fancy,styles,intro,main_image,images)");
             strSql.Append(" values (");
-            strSql.Append("@category_id,@type,@name,@price,@price_high,@price_fancy,@styles,@intro,@main_image,@images)");
+            strSql.Append("?category_id,?type,?name,?price,?price_high,?price_fancy,?styles,?intro,?main_image,?images)");
             MySqlParameter[] parameters = {
-					new MySqlParameter("@category_id", MySqlDbType.Int32,10),
-					new MySqlParameter("@type", MySqlDbType.Enum),
-					new MySqlParameter("@name", MySqlDbType.VarChar,200),
-					new MySqlParameter("@price", MySqlDbType.Decimal,12),
-					new MySqlParameter("@price_high", MySqlDbType.Decimal,12),
-					new MySqlParameter("@price_fancy", MySqlDbType.Decimal,12),
-					new MySqlParameter("@styles", MySqlDbType.Text),
-					new MySqlParameter("@intro", MySqlDbType.VarChar,500),
-					new MySqlParameter("@main_image", MySqlDbType.VarChar,500),
-					new MySqlParameter("@images", MySqlDbType.Text)};
+					new MySqlParameter("?category_id", MySqlDbType.Int32,10),
+					new MySqlParameter("?type", MySqlDbType.Enum),
+					new MySqlParameter("?name", MySqlDbType.VarChar,200),
+					new MySqlParameter("?price", MySqlDbType.Decimal,12),
+					new MySqlParameter("?price_high", MySqlDbType.Decimal,12),
+					new MySqlParameter("?price_fancy", MySqlDbType.Decimal,12),
+					new MySqlParameter("?styles", MySqlDbType.Text),
+					new MySqlParameter("?intro", MySqlDbType.VarChar,500),
+					new MySqlParameter("?main_image", MySqlDbType.VarChar,500),
+					new MySqlParameter("?images", MySqlDbType.Text)};
             parameters[0].Value = model.CategoryID;
             parameters[1].Value = model.CategoryType;
             parameters[2].Value = model.Name;
@@ -85,29 +85,29 @@ namespace TextileCity.DataAccess
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("update material set ");
-            strSql.Append("category_id=@category_id,");
-            strSql.Append("type=@type,");
-            strSql.Append("name=@name,");
-            strSql.Append("price=@price,");
-            strSql.Append("price_high=@price_high,");
-            strSql.Append("price_fancy=@price_fancy,");
-            strSql.Append("styles=@styles,");
-            strSql.Append("intro=@intro,");
-            strSql.Append("main_image=@main_image,");
-            strSql.Append("images=@images");
-            strSql.Append(" where id=@id");
+            strSql.Append("category_id=?category_id,");
+            strSql.Append("type=?type,");
+            strSql.Append("name=?name,");
+            strSql.Append("price=?price,");
+            strSql.Append("price_high=?price_high,");
+            strSql.Append("price_fancy=?price_fancy,");
+            strSql.Append("styles=?styles,");
+            strSql.Append("intro=?intro,");
+            strSql.Append("main_image=?main_image,");
+            strSql.Append("images=?images");
+            strSql.Append(" where id=?id");
             MySqlParameter[] parameters = {
-					new MySqlParameter("@category_id", MySqlDbType.Int32,10),
-					new MySqlParameter("@type", MySqlDbType.Enum),
-					new MySqlParameter("@name", MySqlDbType.VarChar,200),
-					new MySqlParameter("@price", MySqlDbType.Decimal,12),
-					new MySqlParameter("@price_high", MySqlDbType.Decimal,12),
-					new MySqlParameter("@price_fancy", MySqlDbType.Decimal,12),
-					new MySqlParameter("@styles", MySqlDbType.Text),
-					new MySqlParameter("@intro", MySqlDbType.VarChar,500),
-					new MySqlParameter("@main_image", MySqlDbType.VarChar,500),
-					new MySqlParameter("@images", MySqlDbType.Text),
-					new MySqlParameter("@id", MySqlDbType.Int32,10)};
+					new MySqlParameter("?category_id", MySqlDbType.Int32,10),
+					new MySqlParameter("?type", MySqlDbType.Enum),
+					new MySqlParameter("?name", MySqlDbType.VarChar,200),
+					new MySqlParameter("?price", MySqlDbType.Decimal,12),
+					new MySqlParameter("?price_high", MySqlDbType.Decimal,12),
+					new MySqlParameter("?price_fancy", MySqlDbType.Decimal,12),
+					new MySqlParameter("?styles", MySqlDbType.Text),
+					new MySqlParameter("?intro", MySqlDbType.VarChar,500),
+					new MySqlParameter("?main_image", MySqlDbType.VarChar,500),
+					new MySqlParameter("?images", MySqlDbType.Text),
+					new MySqlParameter("?id", MySqlDbType.Int32,10)};
             parameters[0].Value = model.CategoryID;
             parameters[1].Value = model.CategoryType;
             parameters[2].Value = model.Name;
@@ -139,9 +139,9 @@ namespace TextileCity.DataAccess
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append("delete from material ");
-            strSql.Append(" where id=@id");
+            strSql.Append(" where id=?id");
             MySqlParameter[] parameters = {
-					new MySqlParameter("@id", MySqlDbType.Int32)
+					new MySqlParameter("?id", MySqlDbType.Int32)
 			};
             parameters[0].Value = id;
 
@@ -183,9 +183,9 @@ namespace TextileCity.DataAccess
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select id,category_id,type,name,price,price_high,price_fancy,styles,intro,main_image,images from material ");
-            strSql.Append(" where id=@id");
+            strSql.Append(" where id=?id");
             MySqlParameter[] parameters = {
-					new MySqlParameter("@id", MySqlDbType.Int32)
+					new MySqlParameter("?id", MySqlDbType.Int32)
 			};
             parameters[0].Value = id;
 
@@ -292,25 +292,30 @@ namespace TextileCity.DataAccess
             if (ids.Length > 0)
             {
                 ids = ids.Remove(ids.Length - 1, 1);
-            }
-            string strSqlCount = string.Format("select count(id) from material WHERE category_id in ({0}) ", ids);
-            strSql.Append("select id,name,main_image ");
-            strSql.Append(" FROM material ");
-            strSql.AppendFormat(" WHERE category_id in ({0}) ", ids);
-            int offset = 0;
-            if (pageIndex > 1)
-            {
-                offset = (pageIndex - 1) * pageSize;
-            }
-            strSql.AppendFormat(" LIMIT {0},{1} ", offset, pageSize);
 
-            object objCount = MysqlHelper.ExecuteScalar(strSqlCount);
-            if (objCount != null)
-            {
-                int.TryParse(objCount.ToString(), out count);
+                string strSqlCount = string.Format("select count(id) from material WHERE category_id in ({0}) ", ids);
+                strSql.Append("select id,name,main_image ");
+                strSql.Append(" FROM material ");
+                strSql.AppendFormat(" WHERE category_id in ({0}) ", ids);
+                int offset = 0;
+                if (pageIndex > 1)
+                {
+                    offset = (pageIndex - 1) * pageSize;
+                }
+                strSql.AppendFormat(" LIMIT {0},{1} ", offset, pageSize);
+
+                object objCount = MysqlHelper.ExecuteScalar(strSqlCount);
+                if (objCount != null)
+                {
+                    int.TryParse(objCount.ToString(), out count);
+                }
+                DataSet ds = MysqlHelper.ExecuteDataSet(strSql.ToString());
+                return ds;
             }
-            DataSet ds = MysqlHelper.ExecuteDataSet(strSql.ToString());
-            return ds;
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -382,13 +387,13 @@ namespace TextileCity.DataAccess
         public DataSet GetList(int PageSize,int PageIndex,string strWhere)
         {
             MySqlParameter[] parameters = {
-                    new MySqlParameter("@tblName", MySqlDbType.VarChar, 255),
-                    new MySqlParameter("@fldName", MySqlDbType.VarChar, 255),
-                    new MySqlParameter("@PageSize", MySqlDbType.Int32),
-                    new MySqlParameter("@PageIndex", MySqlDbType.Int32),
-                    new MySqlParameter("@IsReCount", MySqlDbType.Bit),
-                    new MySqlParameter("@OrderType", MySqlDbType.Bit),
-                    new MySqlParameter("@strWhere", MySqlDbType.VarChar,1000),
+                    new MySqlParameter("?tblName", MySqlDbType.VarChar, 255),
+                    new MySqlParameter("?fldName", MySqlDbType.VarChar, 255),
+                    new MySqlParameter("?PageSize", MySqlDbType.Int32),
+                    new MySqlParameter("?PageIndex", MySqlDbType.Int32),
+                    new MySqlParameter("?IsReCount", MySqlDbType.Bit),
+                    new MySqlParameter("?OrderType", MySqlDbType.Bit),
+                    new MySqlParameter("?strWhere", MySqlDbType.VarChar,1000),
                     };
             parameters[0].Value = "material";
             parameters[1].Value = "id";

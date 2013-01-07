@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    string message = "";
+    string account = string.Empty;
+    if (ViewData["Message"] != null)
+    {
+        message = ViewData["Message"].ToString();
+    }
+    if (ViewData["Account"] != null)
+    {
+        account = ViewData["Account"].ToString();
+    }
+}
+<div class="container">
+    <div class="row">
+        <div class="well span6 offset3 login-form">
+            <form class="form-horizontal" id="form_login" name="form_login" action="login" method="post" onkeydown="submitByEnter()">
+                <fieldset>
+                    <legend>欢迎回来<a class="no-register" href="register" rel="tooltip" data-placement="left"
+                        title="马上注册个账号">还没有账号？赶快加入我们</a></legend>
+                    @{                                                                                                                   
+                        if (!string.IsNullOrEmpty(message))
+                        {
+                        <div class="err-msg  alert alert-error" id="msg">
+                            @message
+                        </div>
+                        }                       
+                    }
+                    <div class="control-group">
+                        <label class="control-label" for="inputAccount">账号：</label>
+                        <div class="controls">
+                            <input type="text" id="inputAccount" name="inputAccount" value="@account" placeholder="账号或者邮箱">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputPassword">密码：</label>
+                        <div class="controls">
+                            <input type="password" id="inputPassword" name="inputPassword" placeholder="密码">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <a class="btn  btn-red" onclick="login()" href="javascript:void(0)">登录</a>
+                            <a class="forgot" href="forgot" rel="tooltip" data-placement="right" title="通过邮箱找回密码">忘记密码？</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <div id="myModal" class="modal alert-error   hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header ">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">错误</h3>
+                </div>
+                <div class="modal-body">
+                    <p id="err_msg"></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">我知道了</button>
+                </div>
+            </div>
+            <script>
+                $('.forgot').tooltip();
+                $('.no-register').tooltip();
+                function submitByEnter() {
+                    if (event.keyCode == 13) {
+                        login();                   
+                    }
+                }
+                function login() {
+                    var regxPwd = /^\w{5,25}$/;
+                    var acc = $('#inputAccount').val();
+                    var pwd = $('#inputPassword').val();
+                   
+                    if (acc == '') {
+                        $('#err_msg').html('用户名不能为空');
+                        $('#myModal').modal('show');
+                        return false;
+                    }
+                    if (!regxPwd.test(pwd)) {
+                        $('#err_msg').html('密码长度必须为5-25位！');
+                        $('#myModal').modal('show');
+                        return false;
+                    }
+                    $('#form_login').submit();
+                }
+            </script>
+        </div>
+    </div>
+</div>

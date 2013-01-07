@@ -15,8 +15,7 @@ namespace WebApp
             routes.MapRoute(
              name: "MaterialType",
              url: "textile/{type}/{id}",
-             defaults: new { controller = "Textile", action = "Index",type = UrlParameter.Optional,id=UrlParameter.Optional }
-             
+             defaults: new { controller = "Textile", action = "Index",type = UrlParameter.Optional,id=UrlParameter.Optional }             
             );
             routes.MapRoute(
              name: "List",

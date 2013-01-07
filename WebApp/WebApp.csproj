@@ -122,10 +122,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\TextileController.cs" />
+    <Compile Include="Filters\UserFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\DetailItem.cs" />
+    <Compile Include="Models\Navigation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,11 +200,69 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="images\bg-bot-tail.gif" />
+    <Content Include="images\bg-top-shadow.png" />
+    <Content Include="images\bg-top-tail.jpg" />
+    <Content Include="images\bg-top-tail2.jpg" />
+    <Content Include="images\bg-top.jpg" />
+    <Content Include="images\button-tail.gif" />
+    <Content Include="images\carousel-control.png" />
+    <Content Include="images\carousel-li-bg.png" />
+    <Content Include="images\footer-tail.gif" />
+    <Content Include="images\gallery-img1.jpg" />
+    <Content Include="images\gallery-img2.jpg" />
+    <Content Include="images\gallery-img3.jpg" />
+    <Content Include="images\gallery-img4.jpg" />
+    <Content Include="images\gallery-img5.jpg" />
+    <Content Include="images\gallery-img6.jpg" />
+    <Content Include="images\marker-2.gif" />
+    <Content Include="images\marker.png" />
+    <Content Include="images\menu-a-tail.gif" />
+    <Content Include="images\page1-img1.jpg" />
+    <Content Include="images\page1-img2.jpg" />
+    <Content Include="images\page2-img1.jpg" />
+    <Content Include="images\page2-img2.jpg" />
+    <Content Include="images\page3-img1.jpg" />
+    <Content Include="images\page3-img2.jpg" />
+    <Content Include="images\page3-img3.jpg" />
+    <Content Include="images\page3-img4.jpg" />
+    <Content Include="images\page3-img5.jpg" />
+    <Content Include="images\page4-img1.jpg" />
+    <Content Include="images\page4-img2.jpg" />
+    <Content Include="images\page4-img3.jpg" />
+    <Content Include="images\page4-img4.jpg" />
+    <Content Include="images\page4-img5.jpg" />
+    <Content Include="images\page4-img6.jpg" />
+    <Content Include="images\page4-img7.jpg" />
+    <Content Include="images\pic-1.gif" />
+    <Content Include="images\pic-2.gif" />
+    <Content Include="images\pic-3.gif" />
+    <Content Include="images\pic-4.gif" />
+    <Content Include="images\quote.png" />
+    <Content Include="images\row1-top-tail.gif" />
+    <Content Include="images\row2-tail.gif" />
+    <Content Include="images\search-icon.gif" />
+    <Content Include="images\search-input-tail.gif" />
+    <Content Include="images\social-icons.png" />
+    <Content Include="images\thumb-1.jpg" />
+    <Content Include="images\thumb-2.jpg" />
+    <Content Include="images\thumb-3.jpg" />
+    <Content Include="images\thumb-4.jpg" />
+    <Content Include="images\thumb-5.jpg" />
+    <Content Include="images\thumb-6.jpg" />
+    <Content Include="images\thumb.png" />
     <Content Include="img\arrow-right.png" />
+    <Content Include="img\cart.png" />
     <Content Include="img\glyphicons-halflings-white.png" />
     <Content Include="img\glyphicons-halflings.png" />
+    <Content Include="img\icon-user-red.png" />
+    <Content Include="img\loading-big.gif" />
     <Content Include="img\loading.gif" />
     <Content Include="img\qingfangcheng4.jpg" />
+    <Content Include="img\sprites.png" />
+    <Content Include="img\sprites1.png" />
+    <Content Include="img\user-red.png" />
+    <Content Include="img\user.png" />
     <Content Include="js\application.js" />
     <Content Include="js\bootstrap-alert.js" />
     <Content Include="js\bootstrap-button.js" />
@@ -214,7 +279,9 @@
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery-ui.js" />
+    <Content Include="js\jquery.galleriffic.js" />
     <Content Include="js\jquery.js" />
+    <Content Include="js\jquery.opacityrollover.js" />
     <Content Include="js\list-pager.js" />
     <Content Include="js\list.js" />
     <Content Include="js\slimScroll.min.js" />
@@ -246,10 +313,14 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\textile\index.cshtml" />
     <Content Include="Views\textile\list.cshtml" />
+    <Content Include="Views\Account\loginWidget.cshtml" />
+    <Content Include="Views\Account\loginedWidget.cshtml" />
+    <Content Include="Views\material\material.cshtml" />
+    <Content Include="Views\Account\login.cshtml" />
+    <Content Include="Views\Account\Me.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

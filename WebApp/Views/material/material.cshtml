@@ -1,0 +1,199 @@
+﻿@{
+    ViewBag.Title = "material";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="/js/jquery.galleriffic.js"></script>
+<script src="/js/jquery.opacityrollover.js"></script>
+<div class="container-fluid">
+    <div class="row-fluid" >       
+        <div class="span9 m-980 ">
+            <div class="w980">
+                <div class="selected"   data-icon="&#x002d;"></div>
+                <ul class="breadcrumb">
+                <li>
+                    <a href="/">轻纺城</a> <span class="divider">/</span>
+                </li>
+                <li>
+                    <a href="1">1</a> <span class="divider">/</span>
+                </li>               
+               <li>
+                    <a href="3">as</a> <span class="divider">/</span>
+                </li>
+               <li class="active">2</li>                                                                   
+            </ul>
+                <div class="gallery p3 ">
+                    <div class="wrapper indent-bot ">
+                        <div id="gallery" class="content-img">
+                            <div id="controls" class="controls"></div>
+                            <div class="wrapper">
+                                <div class="slideshow-container">
+                                    <div id="slideshow" class="slideshow"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navigation-container">
+                        <div id="thumbs" class="navigation ">
+                            	<a class="pageLink prev" style="" href="#" title="Previous Page"></a>
+                            <ul class="thumbs noscript">
+                                <li>
+                                    <a class="thumb" href="images/gallery-img1.jpg" title="">
+                                        <img src="images/thumb-1.jpg" alt="" /><span></span> </a>
+                                </li>
+                                   <li>
+                                    <a class="thumb" href="images/gallery-img1.jpg" title="">
+                                        <img src="images/thumb-1.jpg" alt="" /><span></span> </a>
+                                </li>
+                                   <li>
+                                    <a class="thumb" href="images/gallery-img1.jpg" title="">
+                                        <img src="images/thumb-1.jpg" alt="" /><span></span> </a>
+                                </li>
+                                <li >
+                                    <a class="thumb" href="images/gallery-img2.jpg" title="">
+                                        <img src="images/thumb-2.jpg" alt="" />
+                                        <span></span></a>
+                                </li>
+                                <li>
+                                    <a class="thumb" href="images/gallery-img3.jpg" title="">
+                                        <img src="images/thumb-3.jpg" alt="" />
+                                        <span></span></a>
+                                </li>
+                                <li>
+                                    <a class="thumb" href="images/gallery-img4.jpg" title="">
+                                        <img src="images/thumb-4.jpg" alt="" />
+                                        <span></span></a>
+                                </li>
+                                <li>
+                                    <a class="thumb" href="images/gallery-img5.jpg" title="">
+                                        <img src="images/thumb-5.jpg" alt="" />
+                                        <span></span></a>
+                                </li>
+                                <li>
+                                    <a class="thumb" href="images/gallery-img6.jpg" title="">
+                                        <img src="images/thumb-6.jpg" alt="" />
+                                        <span></span></a>
+                                </li>
+                            </ul>
+                            <a class="pageLink next" style="visibility: hidden;" href="#" title="Next Page"></a>
+                        </div>
+                            </div>
+                    </div>
+                     
+                    <div class="inner">
+                        <div class="wrapper text-black">
+                            <span class="title img-indent3">HELLO!</span>
+                            <div class="extra-wrap indent-top2">
+                                <strong>Interior Design</strong> is one of <a target="_blank" href="http://blog.templatemonster.com/free-website-templates/ ">free website templates</a> created by TemplateMonster.com team. This website template is opti mized for 1024X768 screen resolution. It is also XHTML &amp; CSS valid. It has several pages: <a class="color-3" href="index.html">About</a>, <a class="color-3" href="services.html">Services</a>, <a class="color-3" href="catalogue.html">Catalogue</a>, <a class="color-3" href="pricing.html">Pricing</a>, <a class="color-3" href="contacts.html">Contact Us</a> (note that contact us form – doesn’t work).
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="span3 w310 ">
+            <div class="tools">
+                <div class="navbar">
+              <div class="navbar-inner par5">
+                <a class="brand-a  brand-g" href="#"><div>Title</div></a>
+              </div>
+            </div>
+         
+                <label for="search">搜索</label>
+                <div class="input-append mar-r ">
+                    <input class="span11 " placeholder="请输入你要找的面料、辅料" id="search" size="16" type="text">
+                    <a class="btn" href="#"><i class=" icon-search"></i></a>
+                </div>
+                <div class="tools">
+                    <div class="accordion" id="accordion2">
+                        <div class="accordion-group tools">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Collapsible Group Item #1
+                                </a>
+                            </div>
+                            <div id="collapseOne" class="accordion-body collapse in ">
+                                <div class="accordion-inner">
+                                    Anim pariatur cliche...
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-group tools">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">Collapsible Group Item #2
+                                </a>
+                            </div>
+                            <div id="collapseTwo" class="accordion-body collapse">
+                                <div class="accordion-inner">
+                                    Anim pariatur cliche...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+ 
+			$(window).load(function() {
+			// We only want these styles applied when javascript is enabled
+			$('div.navigation').css({'width' : '320px', 'float' : 'right'});
+			$('div.content-img').css('display', 'block');
+	
+			// Initially set opacity on thumbs and add
+			// additional styling for hover effect on thumbs
+			var onMouseOutOpacity = 0.5;
+			$('#thumbs ul.thumbs li span').opacityrollover({
+				mouseOutOpacity:   onMouseOutOpacity,
+				mouseOverOpacity:  0.0,
+				fadeSpeed:         'fast',
+				exemptionSelector: '.selected'
+			});
+			
+			// Initialize Advanced Galleriffic Gallery
+			var gallery = $('#thumbs').galleriffic({
+				delay:                     7000,
+				numThumbs:                 6,
+				preloadAhead:              6,
+				enableTopPager:            false,
+				enableBottomPager:         false,
+				imageContainerSel:         '#slideshow',
+				controlsContainerSel:      '#controls',
+				captionContainerSel:       '',
+				loadingContainerSel:       '',
+				renderSSControls:          true,
+				renderNavControls:         true,
+				playLinkText:              'Play Slideshow',
+				pauseLinkText:             'Pause Slideshow',
+				prevLinkText:              'Prev',
+				nextLinkText:              'Next',
+				nextPageLinkText:          'Next',
+				prevPageLinkText:          'Prev',
+				enableHistory:             true,
+				autoStart:                 7000,
+				syncTransitions:           true,
+				defaultTransitionDuration: 900,
+
+				onSlideChange:             function(prevIndex, nextIndex) {
+					// 'this' refers to the gallery, which is an extension of $('#thumbs')
+					this.find('ul.thumbs li span')
+						.css({opacity:0.5})
+				},
+				onPageTransitionOut:       function(callback) {
+					this.find('ul.thumbs li span').css({display:'block'});
+				},
+				onPageTransitionIn:        function() {
+					this.find('ul.thumbs li span').css({display:'none'});
+				}
+			});
+
+			gallery.find('a.prev').click(function (e) {
+			    gallery.previousPage();
+			    e.preventDefault();
+			});
+
+			gallery.find('a.next').click(function (e) {
+			    gallery.nextPage();
+			    e.preventDefault();
+			});
+		});
+	</script>

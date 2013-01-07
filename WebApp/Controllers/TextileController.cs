@@ -8,7 +8,7 @@ using TextileCity.Operation;
 
 namespace WebApp.Controllers
 {
-    public class TextileController : Controller
+    public class TextileController : ApplicationController
     {
         //
         // GET: /Textile/
@@ -23,7 +23,7 @@ namespace WebApp.Controllers
                     CategoryOperation gop = new CategoryOperation();
                     int parentID = 1;
                     int childID = -1;
-
+                    int currentID = 0;
                     if (id > 0)
                     {
                         Category category = gop.GetModel(id);
@@ -35,20 +35,24 @@ namespace WebApp.Controllers
                         {
                             parentID = category.ParentID;
                             childID = category.CategoryID;
+                            currentID = childID;
                         }
                         else
                         {
                             parentID = category.CategoryID;
                             childID = -1;
+                            currentID = parentID;
                         }
                         string strCategoryType = "";
                         switch (category.Type)
                         {
                             case CategoryType.Fabric:
                                 strCategoryType = "fabric";
+                                ViewBag.NaviCss.Current = TextileCity.Models.Navigation.Fabric;
                                 break;
                             case CategoryType.Accessory:
                                 strCategoryType = "accessory";
+                                ViewBag.NaviCss.Current = TextileCity.Models.Navigation.Accessory;
                                 break;
                         }
                         if (type != strCategoryType)
@@ -63,15 +67,18 @@ namespace WebApp.Controllers
                         {
                             case "fabric":
                                 category = gop.FirstFabricParent();
+                                ViewBag.NaviCss.Current = TextileCity.Models.Navigation.Fabric;
                                 break;
                             case "accessory":
                                 category = gop.FirstAccessoryParent();
+                                ViewBag.NaviCss.Current = TextileCity.Models.Navigation.Accessory;
                                 break;
                         }
                         if (category != null)
                         {
                             parentID = category.CategoryID;
                             childID = -1;
+                            currentID = parentID;
                         }
                     }
 
@@ -80,7 +87,7 @@ namespace WebApp.Controllers
                     ViewData["CurrentType"] = type;
                     ViewData["FabricCategories"] = gop.GetFabricCategories();
                     ViewData["AccessoryCategories"] = gop.GetAccessoryCategories();
-                    ViewData["CurrentID"] = id;
+                    ViewData["CurrentID"] = currentID;
                     return View();
                 }
                 catch

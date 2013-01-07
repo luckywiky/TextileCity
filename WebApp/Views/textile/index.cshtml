@@ -7,7 +7,7 @@
     int currentParentID = -1;
     int currentChildID = -1;
     int currentID = 0;
-    
+
     string currentTypeName = "面料";
     string currentParentName = string.Empty;
     string currentChildName = string.Empty;
@@ -19,7 +19,7 @@
     {
         currentChildID = (int)ViewData["CurrentChildID"];
     }
-    if(ViewData["CurrentID"]!=null)
+    if (ViewData["CurrentID"] != null)
     {
         currentID = (int)ViewData["CurrentID"];
     }
@@ -35,13 +35,13 @@
                     {
                         currentTab = ViewData["CurrentType"].ToString();
                     }
-                    if(currentTab=="fabric")
+                    if (currentTab == "fabric")
                     {
                         currentTypeName = CategoryType.Fabric;
                     }
                     else
                     {
-                        currentTypeName =CategoryType.Accessory;
+                        currentTypeName = CategoryType.Accessory;
                     }
                 }
                 <input value="#@currentTab" id="current-tab" type="hidden" />
@@ -58,7 +58,7 @@
                                 CategoryCollection fabrics = ViewData["FabricCategories"] as CategoryCollection;
                                 List<Category> fabricParents = fabrics.ParentCategories;
                                 string cssHeader = "category-header";
-                              
+
                                 foreach (Category parent in fabricParents)
                                 {
                                     cssHeader = "category-header";
@@ -87,7 +87,7 @@
                                     {
                                         foreach (Category c in fabrics[parent.CategoryID])
                                         {
-                                            
+
                                             if (c.CategoryID == currentChildID)
                                             {
                                         <li><a class="active" href="/textile/fabric/@c.CategoryID">@c.Name</a></li>
@@ -145,13 +145,13 @@
                                             cssActive = "";
                                             if (c.CategoryID == currentChildID)
                                             {
-                                                 <li><a class="active" href="/textile/accessory/@c.CategoryID">@c.Name</a></li>
+                                        <li><a class="active" href="/textile/accessory/@c.CategoryID">@c.Name</a></li>
                                                 currentChildName = c.Name;
                                             }
                                             else
                                             {
                                         <li><a href="/textile/accessory/@c.CategoryID">@c.Name</a></li>
-                                    }
+                                            }
                                         }
                                     }
                                     }
@@ -175,27 +175,29 @@
                     <a href="/">轻纺城</a> <span class="divider">/</span>
                 </li>
                 <li>
-                    <a href="@string.Format("/textile/{0}",currentTab)">@currentTypeName</a> <span class="divider">/</span>
+                    <a href="@string.Format("/textile/{0}", currentTab)">@currentTypeName</a> <span class="divider">/</span>
                 </li>
                 @{
-                    if(currentChildName!=string.Empty)
+                    if (currentChildName != string.Empty)
                     {
-                         <li>
-                    <a href="@string.Format("/textile/{0}/{1}",currentTab,currentParentID)">@currentParentName</a> <span class="divider">/</span>
-                </li>
-                <li class="active">@currentChildName</li>
+                    <li>
+                        <a href="@string.Format("/textile/{0}/{1}", currentTab, currentParentID)">@currentParentName</a> <span class="divider">/</span>
+                    </li>
+                    <li class="active">@currentChildName</li>
                     }
                     else
                     {
-                        <li class="active">@currentParentName</li>
+                    <li class="active">@currentParentName</li>
                     }
                 }
-                
+
             </ul>
-            <div class="loading" id="loading"><img src="/img/loading-big.gif"/></div>
-            <div id="list_content">           
-            @{Html.RenderAction("list", new { categoryid = currentID });}
-           
+            <div class="loading" id="loading">
+                <img src="/img/loading-big.gif" />
+            </div>
+            <div id="list_content">
+                @{Html.RenderAction("list", new { categoryid = currentID });}
+
             </div>
         </div>
 
