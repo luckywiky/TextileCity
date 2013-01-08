@@ -263,7 +263,7 @@ namespace TextileCity.DataAccess
             string strSqlCount = string.Format("select count(id) from material WHERE category_id = {0} ", categoryID);
             strSql.Append("select id,name,main_image ");
             strSql.Append(" FROM material ");
-            strSql.AppendFormat(" WHERE category_id = {0} ", categoryID);
+            strSql.AppendFormat(" WHERE category_id = {0} order by id desc ", categoryID);
             int offset = 0;
             if (pageIndex > 1)
             {
@@ -296,7 +296,7 @@ namespace TextileCity.DataAccess
                 string strSqlCount = string.Format("select count(id) from material WHERE category_id in ({0}) ", ids);
                 strSql.Append("select id,name,main_image ");
                 strSql.Append(" FROM material ");
-                strSql.AppendFormat(" WHERE category_id in ({0}) ", ids);
+                strSql.AppendFormat(" WHERE category_id in ({0}) order by id desc ", ids);
                 int offset = 0;
                 if (pageIndex > 1)
                 {

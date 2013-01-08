@@ -12,15 +12,15 @@ namespace TextileCity.Entity
         #region Model
 		private int _id;
 		private int _category_id;
-		private string _type;
-		private string _name;
-		private decimal _price;
-		private decimal _price_high;
-		private decimal _price_fancy;
-		private string _styles;
-		private string _intro;
-		private string _main_image;
-		private string _images;
+        private string _type = string.Empty;
+        private string _name = string.Empty;
+		private decimal _price=0.0m;
+		private decimal _price_high=0.0m;
+		private decimal _price_fancy=0.0m;
+        private string _styles = string.Empty;
+        private string _intro = string.Empty;
+		private string _main_image=string.Empty;
+        private string _images = string.Empty;
 		/// <summary>
 		/// auto_increment
 		/// </summary>

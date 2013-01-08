@@ -11,6 +11,11 @@ namespace PagerTest
     {
         static void Main(string[] args)
         {
+            decimal DA = 2002121.00m;
+            Console.WriteLine(DA);
+            Console.WriteLine("N4", DA);
+            Console.WriteLine("{0:N}", DA);
+            Console.Read();
             Pager pager = new Pager(1, 150, 8);
             for (int i = 1; i <= pager.Count; i++)
             {

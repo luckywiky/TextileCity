@@ -124,6 +124,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CraftController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
     <Compile Include="Controllers\TextileController.cs" />
     <Compile Include="Filters\UserFilter.cs" />
@@ -284,6 +286,7 @@
     <Content Include="js\jquery.opacityrollover.js" />
     <Content Include="js\list-pager.js" />
     <Content Include="js\list.js" />
+    <Content Include="js\material.js" />
     <Content Include="js\slimScroll.min.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />

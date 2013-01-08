@@ -23,7 +23,12 @@ namespace WebApp
              defaults: new { controller = "Textile", action = "list" },
              constraints: new { categoryid = @"\d+" }         
             );
-          
+            routes.MapRoute(
+               name: "Material",
+               url: "Material/{id}",
+               defaults: new { controller = "Material", action = "Index" },
+              constraints: new { id = @"\d+" }
+              );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

@@ -17,11 +17,11 @@ namespace TextileCity.Entity
 		private string _email;
 		private string _password;
 		private int _state=1;
-		private string _name;
-		private string _phone;
-		private string _company;
-		private string _address;
-		private string _sex;
+		private string _name=string.Empty;
+        private string _phone = string.Empty;
+        private string _company = string.Empty;
+        private string _address = string.Empty;
+        private string _sex = string.Empty;
 		private DateTime _register_time;
 		/// <summary>
 		/// auto_increment

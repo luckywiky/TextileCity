@@ -2,25 +2,47 @@
     ViewBag.Title = "material";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using TextileCity.Entity;
+@{
+    Material dataModel = new Material();
+    if (ViewData["DataModel"] != null)
+    {
+        dataModel = ViewData["DataModel"] as Material;
+    }
+    string categoryTypeUrl = string.Empty;
+    if (ViewData["CategoryTypeUrl"] != null)
+    {
+        categoryTypeUrl = ViewData["CategoryTypeUrl"].ToString();
+    }
+    string category = string.Empty;
+    if (ViewData["CategoryName"] != null)
+    {
+        category = ViewData["CategoryName"].ToString();
+    }
+    List<string> images = new List<string>();
+    if (ViewData["Images"] != null)
+    {
+        images = ViewData["Images"] as List<string>;
+    }
+}
 <script src="/js/jquery.galleriffic.js"></script>
 <script src="/js/jquery.opacityrollover.js"></script>
 <div class="container-fluid">
-    <div class="row-fluid" >       
+    <div class="row-fluid">
         <div class="span9 m-980 ">
             <div class="w980">
-                <div class="selected"   data-icon="&#x002d;"></div>
                 <ul class="breadcrumb">
-                <li>
-                    <a href="/">轻纺城</a> <span class="divider">/</span>
-                </li>
-                <li>
-                    <a href="1">1</a> <span class="divider">/</span>
-                </li>               
-               <li>
-                    <a href="3">as</a> <span class="divider">/</span>
-                </li>
-               <li class="active">2</li>                                                                   
-            </ul>
+                    <li>
+                        <a href="/">轻纺城</a> <span class="divider">/</span>
+                    </li>
+                    <li>
+                        <a href="/textile/@categoryTypeUrl">@dataModel.CategoryType</a> <span class="divider">/</span>
+                    </li>
+                    <li>
+                        <a href="@string.Format("/textile/{0}/{1}", categoryTypeUrl, dataModel.CategoryID)">@category</a> <span class="divider">/</span>
+                    </li>
+                    <li class="active">@dataModel.Name</li>
+                </ul>
                 <div class="gallery p3 ">
                     <div class="wrapper indent-bot ">
                         <div id="gallery" class="content-img">
@@ -32,71 +54,250 @@
                             </div>
                         </div>
                         <div class="navigation-container">
-                        <div id="thumbs" class="navigation ">
-                            	<a class="pageLink prev" style="" href="#" title="Previous Page"></a>
-                            <ul class="thumbs noscript">
-                                <li>
-                                    <a class="thumb" href="images/gallery-img1.jpg" title="">
-                                        <img src="images/thumb-1.jpg" alt="" /><span></span> </a>
-                                </li>
-                                   <li>
-                                    <a class="thumb" href="images/gallery-img1.jpg" title="">
-                                        <img src="images/thumb-1.jpg" alt="" /><span></span> </a>
-                                </li>
-                                   <li>
-                                    <a class="thumb" href="images/gallery-img1.jpg" title="">
-                                        <img src="images/thumb-1.jpg" alt="" /><span></span> </a>
-                                </li>
-                                <li >
-                                    <a class="thumb" href="images/gallery-img2.jpg" title="">
-                                        <img src="images/thumb-2.jpg" alt="" />
-                                        <span></span></a>
-                                </li>
-                                <li>
-                                    <a class="thumb" href="images/gallery-img3.jpg" title="">
-                                        <img src="images/thumb-3.jpg" alt="" />
-                                        <span></span></a>
-                                </li>
-                                <li>
-                                    <a class="thumb" href="images/gallery-img4.jpg" title="">
-                                        <img src="images/thumb-4.jpg" alt="" />
-                                        <span></span></a>
-                                </li>
-                                <li>
-                                    <a class="thumb" href="images/gallery-img5.jpg" title="">
-                                        <img src="images/thumb-5.jpg" alt="" />
-                                        <span></span></a>
-                                </li>
-                                <li>
-                                    <a class="thumb" href="images/gallery-img6.jpg" title="">
-                                        <img src="images/thumb-6.jpg" alt="" />
-                                        <span></span></a>
-                                </li>
-                            </ul>
-                            <a class="pageLink next" style="visibility: hidden;" href="#" title="Next Page"></a>
-                        </div>
+                            <div id="thumbs" class="navigation ">
+                                <ul class="thumbs noscript">
+                                    @{
+                                        if (images.Count <= 0)
+                                        {                                              
+                                        <li>
+                                            <a class="thumb" href="/img/noimage.jpg" title="">
+                                                <img src="/img/noimage.jpg" /><span></span> </a>
+                                        </li>
+                                        }
+                                        else
+                                        {
+                                            foreach (string image in images)
+                                            {
+                                            
+                                        <li>
+                                            <a class="thumb" href="@image" title="">
+                                                <img src="@image"/><span></span> </a>
+                                        </li>
+                                            }
+                                        }
+                                    }
+                                </ul>
                             </div>
+                        </div>
                     </div>
-                     
+
                     <div class="inner">
-                        <div class="wrapper text-black">
-                            <span class="title img-indent3">HELLO!</span>
-                            <div class="extra-wrap indent-top2">
-                                <strong>Interior Design</strong> is one of <a target="_blank" href="http://blog.templatemonster.com/free-website-templates/ ">free website templates</a> created by TemplateMonster.com team. This website template is opti mized for 1024X768 screen resolution. It is also XHTML &amp; CSS valid. It has several pages: <a class="color-3" href="index.html">About</a>, <a class="color-3" href="services.html">Services</a>, <a class="color-3" href="catalogue.html">Catalogue</a>, <a class="color-3" href="pricing.html">Pricing</a>, <a class="color-3" href="contacts.html">Contact Us</a> (note that contact us form – doesn’t work).
-                            </div>
+                        <div class="mar-r20 mar-b0  text-black">
+                            <p class="title ">@dataModel.Name</p>
+                            <div>@dataModel.Intro</div>
                         </div>
                     </div>
+                </div>
+                <div class="well well-small">
+                    <div id="submitModal" class="modal hide fade txt-black" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h3 class="font-color-red">添加成功！</h3>                               
+                            </div>
+                            <div class="modal-body"> 
+                                <h3>当前购物车有<span id="cart-count"></span>件商品</h3>
+                                <h4>共 <em>¥</em><span id="cart-price"></span></h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-success" aria-hidden="true" data-dismiss="modal">继续</button>
+                                <a class="btn btn-red" href="/account/cart">去结算</a>
+                            </div>
+                        </div>
+                    @{
+                        if (dataModel.CategoryType == CategoryType.Fabric)
+                        {
+                        <form class="form-b0" id="form-fabric">
+                            <div class="row mar-l15">
+                                <div class="span8">
+                                    <fieldset>
+                                        <legend class="text-success">制作工艺</legend>
+                                        <input type="hidden" id="craft" name="craft" value="">
+                                        <input type="hidden" id="current-craft-price" name="current-craft-price" value="">
+                                        <ul class="inline row marleft0 craft-list" id="craft-list">
+                                            @{
+                            if (ViewData["Crafts"] != null)
+                            {
+                                List<Craft> crafts = ViewData["Crafts"] as List<Craft>;
+                                foreach (Craft craft in crafts)
+                                {
+                                                <li class="span3">
+                                                    <div class="craft-item" id="craft-@craft.CraftID">
+                                                        <div id="craft-block-@craft.CraftID" class="craft-block">
+                                                            <div class="name"><span>@craft.Name</span></div>
+                                                            <div class="price">
+                                                                <em>¥</em><span id="craft-price-@craft.CraftID">@craft.Price</span>
+                                                                <a href="javascript:void(0)" id="craft-intro-@craft.CraftID" class="intro">工艺详情</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                }
+                            }
+                                            }
+                                        </ul>
+                                    </fieldset>
+
+                                </div>
+                                <div class="span4">
+                                    <fieldset>
+                                        <legend class="text-error">颜色样式</legend>
+                                        <input type="hidden" id="materialid" name="materialid" value="@dataModel.MaterialID">
+                                        <input type="hidden" id="style" name="style" value="1">
+                                        <input type="hidden" id="current-style-price" name="current-style-price" value="@dataModel.Price">
+                                        <ul class="inline row color-list" id="style-list">
+                                            <li class="span4"><a id="style-1">
+                                                <div id="style-block-1" class="color-block active">
+                                                    <h4>本色</h4>
+                                                    <div><em>¥</em><span id="style-price-1">@dataModel.Price</span></div>
+                                                </div>
+                                            </a>
+                                            </li>
+                                            @{
+                            if (dataModel.PriceHigh > 0)
+                            {
+                                                <li class="span4"><a id="style-2">
+                                                    <div id="style-block-2" class="color-block">
+                                                        <h4>高彩</h4>
+                                                        <div><em>¥</em><span id="style-price-2">@dataModel.PriceHigh</span></div>
+                                                    </div>
+                                                </a></li>
+                            }
+                            if (dataModel.PriceFancy > 0)
+                            {                                           
+                                                <li class="span4"><a id="style-3">
+                                                    <div id="style-block-3" class="color-block">
+                                                        <h4>花色</h4>
+                                                        <div><em>¥</em><span id="style-price-3">@dataModel.PriceFancy</span></div>
+                                                    </div>
+                                                </a></li>
+                            }
+                                            }
+                                        </ul>
+
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend>数量</legend>
+                                        <div class="alert alert-error hide-msg" id="count-msg">
+                                            <strong>数量必须为正整数!</strong>
+                                        </div>
+                                        <ul class="inline row numbers ">
+                                            <li class=" btn-group span4"><button type="button" onclick="add(-10)" id="sub10" class="btn">-10</button>
+                                                <button type="button" id="sub1" onclick="add(-1)" class="btn ">-1</button></li>
+                                            <li class="span4">
+                                                <input class="span12" onchange="total()" type="text" id="count" name="count" value="1" /></li>
+                                            <li class="btn-group span4"><button type="button" id="add1" onclick="add(1)" class="btn">+1</button>
+                                                <button type="button" id="add10" class="btn" onclick="add(10)">+10</button></li>
+                                        </ul>
+                                    </fieldset>
+                                    <ul class="inline numbers  row">
+                                        <li class="span6">
+                                            <div class="total-title">总价：</div>
+                                            <div class="total"><em>¥</em><span id="total-price"></span></div>
+                                        </li>
+                                        <li class="span6 mar-top25">
+                                            <a class="btn btn-red btn-large btn-block" href="javascript:void(0)" onclick="ajaxsubmit()"><i class="icon-plus icon-white mar-r5"></i>加入购物车</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </form>
+                        <div id="craftIntroModal" class="modal hide fade txt-black" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h3 id="craft-modal-header" class="font-color-red"></h3>
+                                <h4 id="craft-modal-price" class="font-color-red"><em>¥</em></h4>
+                            </div>
+                            <div class="modal-body" id="craft-modal-body"></div>
+                            <div class="modal-footer">
+                                <button class="btn btn-success" aria-hidden="true" data-dismiss="modal">我知道了</button>
+                            </div>
+                        </div>
+                        }
+                        else
+                        {
+                        <form class="form-b0" id="form-accessory">
+                              <input type="hidden" id="materialid" name="materialid" value="@dataModel.MaterialID">
+                            <div class="row mar-l15">
+                                @{
+                            if (ViewData["Styles"] != null)
+                            {
+                                List<Style> styles = ViewData["Styles"] as List<Style>;
+                                <div class="span7">
+                                    <fieldset>
+                                        <legend class="text-success">材质</legend>
+                                          <input type="hidden" id="mstyle" name="mstyle" value="">
+                                        <input type="hidden" id="current-mstyle-price" name="current-mstyle-price" value="0">                                      
+                                             <ul class="inline row marleft0 craft-list" id="mstyle-list">
+                                       @{                                           
+                                foreach (Style s in styles)
+                                {
+                                        <li class="span3">
+                                                    <div class="craft-item" id="mstyle-@s.StyleID">
+                                                        <div id="mstyle-block-@s.StyleID" class="craft-block">
+                                                            <div class="name "><span>@s.Name</span></div>
+                                                            <div class="price">
+                                                                <em>¥</em><span id="mstyle-price-@s.StyleID">@s.Price</span>                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                }
+                                       }
+                                                 </ul>
+                                    </fieldset>
+                                </div>
+                            }
+                            else
+                            {
+                                 <input type="hidden" id="current-mstyle-price" name="current-mstyle-price" value="@dataModel.Price">
+                            }
+                                }
+                                <div class="span5">
+                                    <fieldset>
+                                        <legend>数量</legend>
+                                        <div class="alert alert-error hide-msg" id="count-msg">                                         
+                                            <strong>数量必须为正整数!</strong>
+                                        </div>
+                                        <ul class="inline row numbers ">
+                                            <li class="btn-group span4">
+                                                <button type="button" onclick="addM(-10)" id="sub10" class="btn">-10</button>
+                                                <button type="button"  id="sub1" onclick="addM(-1)" class="btn ">-1</button>
+                                            </li>
+                                            <li class="span4">
+                                                <input class="span12" onchange="totalm()" type="text" id="count" name="count" value="1" /></li>
+                                            <li class="btn-group span4">
+                                                <button type="button" id="add1" onclick="addM(1)" class="btn">+1</button>
+                                                <button type="button" id="add10" class="btn" onclick="addM(10)">+10</button></li>
+                                        </ul>
+                                    </fieldset>
+                                    <ul class="inline numbers  row">
+                                        <li class="span6">
+                                            <div class="total-title">总价：</div>
+                                            <div class="total"><em>¥</em><span id="total-price"></span></div>
+                                        </li>
+                                        <li class="span6 mar-top25">
+                                            <a class="btn btn-red btn-large btn-block" href="javascript:void(0)" onclick="ajaxsubmitM()"><i class="icon-plus icon-white mar-r5"></i>加入购物车</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                        }
+                    }
                 </div>
             </div>
         </div>
         <div class="span3 w310 ">
             <div class="tools">
                 <div class="navbar">
-              <div class="navbar-inner par5">
-                <a class="brand-a  brand-g" href="#"><div>Title</div></a>
-              </div>
-            </div>
-         
+                    <div class="navbar-inner par5">
+                        <a class="brand-a  brand-g" href="#">
+                            <div>Title</div>
+                        </a>
+                    </div>
+                </div>
+
                 <label for="search">搜索</label>
                 <div class="input-append mar-r ">
                     <input class="span11 " placeholder="请输入你要找的面料、辅料" id="search" size="16" type="text">
@@ -132,68 +333,14 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
- 
-			$(window).load(function() {
-			// We only want these styles applied when javascript is enabled
-			$('div.navigation').css({'width' : '320px', 'float' : 'right'});
-			$('div.content-img').css('display', 'block');
-	
-			// Initially set opacity on thumbs and add
-			// additional styling for hover effect on thumbs
-			var onMouseOutOpacity = 0.5;
-			$('#thumbs ul.thumbs li span').opacityrollover({
-				mouseOutOpacity:   onMouseOutOpacity,
-				mouseOverOpacity:  0.0,
-				fadeSpeed:         'fast',
-				exemptionSelector: '.selected'
-			});
-			
-			// Initialize Advanced Galleriffic Gallery
-			var gallery = $('#thumbs').galleriffic({
-				delay:                     7000,
-				numThumbs:                 6,
-				preloadAhead:              6,
-				enableTopPager:            false,
-				enableBottomPager:         false,
-				imageContainerSel:         '#slideshow',
-				controlsContainerSel:      '#controls',
-				captionContainerSel:       '',
-				loadingContainerSel:       '',
-				renderSSControls:          true,
-				renderNavControls:         true,
-				playLinkText:              'Play Slideshow',
-				pauseLinkText:             'Pause Slideshow',
-				prevLinkText:              'Prev',
-				nextLinkText:              'Next',
-				nextPageLinkText:          'Next',
-				prevPageLinkText:          'Prev',
-				enableHistory:             true,
-				autoStart:                 7000,
-				syncTransitions:           true,
-				defaultTransitionDuration: 900,
-
-				onSlideChange:             function(prevIndex, nextIndex) {
-					// 'this' refers to the gallery, which is an extension of $('#thumbs')
-					this.find('ul.thumbs li span')
-						.css({opacity:0.5})
-				},
-				onPageTransitionOut:       function(callback) {
-					this.find('ul.thumbs li span').css({display:'block'});
-				},
-				onPageTransitionIn:        function() {
-					this.find('ul.thumbs li span').css({display:'none'});
-				}
-			});
-
-			gallery.find('a.prev').click(function (e) {
-			    gallery.previousPage();
-			    e.preventDefault();
-			});
-
-			gallery.find('a.next').click(function (e) {
-			    gallery.nextPage();
-			    e.preventDefault();
-			});
-		});
-	</script>
+<script type="text/javascript" src="/js/material.js"></script>
+@{
+    if (dataModel.CategoryType == CategoryType.Fabric)
+    {
+        <script type="text/javascript">total();</script>
+    }
+    else
+    {
+         <script type="text/javascript">totalm();</script>
+    }
+}

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TextileCity.Entity;
 using TextileCity.Operation;
+using System.Web;
 
 namespace TextileCity.Models
 {
@@ -68,6 +69,8 @@ namespace TextileCity.Models
         {
         }
 
+        
+
         public void Add(DetailItem item)
         {
             orderList.Add(item);
@@ -119,7 +122,7 @@ namespace TextileCity.Models
             decimal total = 0;
             foreach (DetailItem item in orderList)
             {
-                total += item.Price;
+                total += item.Price*item.Count;
             }
             return total;
         }

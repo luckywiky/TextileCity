@@ -44,8 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoryData.cs" />
+    <Compile Include="CraftData.cs" />
     <Compile Include="MaterialData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StyleData.cs" />
     <Compile Include="UserData.cs" />
   </ItemGroup>
   <ItemGroup>
