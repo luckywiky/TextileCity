@@ -47,7 +47,19 @@ namespace TextileCity.Models
             set;
         }
 
+        public decimal StylePrice
+        {
+            get;
+            set;
+        }
+
         public int Craft
+        {
+            get;
+            set;
+        }
+
+        public string Image
         {
             get;
             set;
@@ -59,9 +71,29 @@ namespace TextileCity.Models
             set;
         }
 
+        public string Name
+        {
+            get;
+            set;
+        }
+
+        public string StyleName
+        {
+            get;
+            set;
+        }
+
+        public string CraftName
+        {
+            get;
+            set;
+        }
+
         public DetailItem()
         {
-            id = new Guid().ToString("N");
+            id =  Guid.NewGuid().ToString("N");
+            Price = 0.00m;
+            StylePrice = 0.00m;
         }
 
         public DetailItem Clone()
@@ -75,7 +107,34 @@ namespace TextileCity.Models
             itemNew.Style = Style;
             itemNew.Type = Type;
             itemNew.Price = Price;
+            itemNew.Image = Image;
+            itemNew.StylePrice = StylePrice;
+            itemNew.Name = Name;
+            itemNew.StyleName = StyleName;
+            itemNew.CraftName = CraftName;
             return itemNew;
+        }
+
+        /// <summary>
+        /// 样式和物品的单价
+        /// </summary>
+        public decimal TotalPrice
+        {
+            get
+            {
+                return Price + StylePrice;
+            }
+        }
+
+        /// <summary>
+        /// 总价
+        /// </summary>
+        public decimal Total
+        {
+            get
+            {
+                return (Price + StylePrice) * Count;
+            }
         }
     }
 }

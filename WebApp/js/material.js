@@ -180,7 +180,6 @@ function countChange() {
     if (count <= 10)
     {
         $('#sub10').addClass('disabled');
-
     }
     else {
         $('#sub10').removeClass('disabled');
@@ -246,14 +245,15 @@ function ajaxsubmit() {
    
     $.ajax({
         url: '/cart/AddFabric',
-        type: 'get',
+        type: 'post',
         dataType: "json",
         data: $('#form-fabric').serialize(),
         success: function (result) {
-          
+           
             if (result.flag == 1) {
                 bindSubmitModel(result.count, result.total);
                 $('#submitModal').modal('show');
+                $('#top-cart-count').text(result.count);               
             }
             else {
                 alert('添加失败');
@@ -272,14 +272,15 @@ function ajaxsubmitM() {
     }
     $.ajax({
         url: '/cart/AddAccessory',
-        type: 'get',
+        type: 'post',
         dataType: "json",
         data: $('#form-accessory').serialize(),
         success: function (result) {          
             if (result.flag == 1) {
                 bindSubmitModel(result.count, result.total);
-                $('#submitModal').modal({ backdrop: false });
-                $('#submitModal').modal('show');
+                $('#top-cart-count').text(result.count);
+                //$('#submitModal').modal({ backdrop: false });
+                $('#submitModal').modal('show');             
             }
             else {
                 alert('添加失败');

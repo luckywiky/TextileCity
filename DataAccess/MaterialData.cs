@@ -318,6 +318,26 @@ namespace TextileCity.DataAccess
             }
         }
 
+        public DataSet GetList(List<int> ids)
+        {
+            DataSet ds = null;
+            if (ids.Count > 0)
+            {
+                string strids = "";
+                foreach (int id in ids)
+                {
+                    strids += string.Format("{0},", id);
+                }
+                strids = strids.Remove(strids.Length - 1, 1);
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append("select id,category_id,type,name,price,price_high,price_fancy,styles,intro,main_image,images ");
+                strSql.Append(" FROM material ");
+                strSql.AppendFormat(" WHERE id in ({0}) ", strids);
+                ds = MysqlHelper.ExecuteDataSet(strSql.ToString());
+            }
+            return ds;
+        }
+
         /// <summary>
         /// 获得数据列表
         /// </summary>

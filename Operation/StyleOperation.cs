@@ -96,6 +96,17 @@ namespace TextileCity.Operation
 			return dal.GetList(strWhere);
 		}
 
+        public List<Style> GetList(List<int> ids)
+        {
+            List<Style> styles = new List<Style>();
+            DataSet ds = dal.GetList(ids);
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                styles = DataTableToList(ds.Tables[0]);
+            }
+            return styles;
+        }
+
         public List<Style> GetStyles(int materialID)
         {
             DataSet ds = dal.GetStyles(materialID);

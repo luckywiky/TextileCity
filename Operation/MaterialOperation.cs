@@ -119,6 +119,17 @@ namespace TextileCity.Operation
 		{
 			return dal.GetList(strWhere);
 		}
+
+        public List<Material> GetList(List<int> ids)
+        {
+            List<Material> materials = new List<Material>();
+            DataSet ds = dal.GetList(ids);
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                materials = DataTableToList(ds.Tables[0]);
+            }
+            return materials;
+        }
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>

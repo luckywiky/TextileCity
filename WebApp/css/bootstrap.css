@@ -5610,9 +5610,11 @@ input[type="submit"].btn.btn-mini {
   padding: 8px 14px;
   margin: 0;
   font-size: 14px;
-  font-weight: normal;
+  font-weight:bold;
   line-height: 18px;
-  background-color: #f7f7f7;
+    background-color: #f7f7f7;
+
+ color:#890000;
   border-bottom: 1px solid #ebebeb;
   -webkit-border-radius: 5px 5px 0 0;
      -moz-border-radius: 5px 5px 0 0;
@@ -5621,6 +5623,7 @@ input[type="submit"].btn.btn-mini {
 
 .popover-content {
   padding: 9px 14px;
+   color:#890000;
 }
 
 .popover .arrow,

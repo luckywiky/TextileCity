@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using TextileCity.Models;
+@using TextileCity.Entity;
+@{
+    Cart cart = ViewData["Cart"] as Cart;
+}
+<div class="container">
+    <div class="row">
+        <div class=" span12 ">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/">轻纺城</a> <span class="divider">/</span>
+                </li>
+                <li>
+                    <a href="/account/me">个人中心</a> <span class="divider">/</span>
+                </li>
+                <li class="active">购物车</li>
+            </ul>
+            <div class="well ">
+                <div class="page-header  cart-header">
+                    <h3>确认订单信息  <small>当前有<em id="itemsCount">@cart.Orders.Count</em>件商品</small></h3>
+                </div>
+                <form action="/cart/save" method="post" id="cartform">
+                <div class="item-clock">
+                    <input type="hidden" id="delivery-type" name="delivery-type" value="1" />
+                    <div class="header-block ">
+                        配送方式：<span class="delivery" id="myTab">
+                            <a class="active" id="dbtn-1" href="javascript:void(0)" onclick="setDelivery(1)">自提</a>
+                            <a href="javascript:void(0)" id="dbtn-2" onclick="setDelivery(2)">代付物流</a>
+                        </span>
+                    </div>
+                    <div class="item-clock">
+                        <div class="row">
+                            <div class="span3">
+                                <label>联系人</label>
+                                <input type="text" class="input-block-level" rel="popover"  data-placement="left" id="input-name"  name="input-name" placeholder="您的姓名">
+                              
+                            </div>
+                            <div class="span3">
+                                <label>电话</label>
+                                <input type="text" class="input-block-level" rel="popover"  data-placement="right" id="input-phone"  name="input-phone" placeholder="您的电话">
+                              
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item-clock" id="address" style="display: none">
+                    <div class="header-block">
+                        收货地址<div class="pull-right">
+                            <a class="btn btn-link">管理收货地址</a>
+                            <div class="btn-group">
+                                <a class="btn  dropdown-toggle" data-toggle="dropdown" href="#">使用已存的收货地址
+	<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu  pull-right">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-clock">
+                        <label>地址</label>
+                        <input type="text" class="input-block-level" id="input-address"  rel="popover" data-placement="bottom" name="input-address" placeholder="收货详细地址">
+                         <div class=""  >
+                                <label class="checkbox" >
+                                    <input type="checkbox" id="cb-save-addr"  onchange="saveAddrChage()"/><span>保存到我的收货地址</span>
+                                    <input type="hidden" id="input-save-addr" name="input-save-addr" value="0"/>
+                                </label>
+                            </div>
+                        
+
+                    </div>
+                </div>
+                </form>
+                <div class="item-clock" id="itemlist">
+                    <div class="header-block header-block-green">购买的物品</div>
+                    <div class="row  item-clock m-block">
+                        <div class="span3">名称</div>
+                        <div class="span2">制作工艺</div>
+                        <div class="span1">类别</div>
+                        <div class="span1">单价</div>
+                        <div class="span1">数量</div>
+                        <div class="span2">小计</div>
+                    </div>
+                    @{
+                        string[] blockCss = new string[] { "alert-error", "" };
+                        int flag = 0;
+                        foreach (DetailItem item in cart.Orders)
+                        {
+                            string typeCss = "text-success";
+                            if (item.Type == CategoryType.Fabric)
+                            {
+                                typeCss = "text-error";
+                            }                      
+                        <div id="item-@item.ID" class="clearfix m-block @blockCss[flag++ % 2]">
+                            <div class="span3 marleft-0">
+                                <div class="clearfix ">
+                                    <div class="simg-block">
+                                        <a href="/material/@item.MaterialID">
+                                            <img src="@item.Image" class="img-polaroid  small-img"></a>
+                                    </div>
+                                    <div class="small-title ">
+                                        <a href="/material/@item.MaterialID" class="name">@item.Name</a>
+                                        @string.Format("{0}：{1}", item.Type == CategoryType.Fabric ? "颜色" : "材质", item.StyleName)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span2">
+                                @{          
+                            if (item.Type == CategoryType.Fabric)
+                            {
+                                    <h5>@item.CraftName</h5>
+                                    <div><em>￥</em>@item.StylePrice</div>
+                            }}
+                            </div>
+                            <div class="span1 @typeCss m-block-text"><strong>@item.Type</strong></div>
+                            <div class="span1 m-block-text" id="item-price-@item.ID">@item.TotalPrice</div>
+                            <div class="span1 pad-top10">
+                                <input class="span1" id="item-count-@item.ID"  rel="popover" value="@item.Count" type="text">   
+                            </div>
+                            <div class="span2 m-block-text" id="item-total-@item.ID">
+                                @item.Total.ToString("G")
+                            </div>
+                            <div class="span1 m-block-text">
+                                <a href="javascript:void(0)" onclick="itemdelete('@item.ID')">删除</a>
+                            </div>
+                        </div>
+                        }
+                    }
+                </div>
+                <div class="item-clock clearfix  order-block">  
+                    <div class="span5">
+
+                    </div>              
+                        <div class="pull-right span4">
+                            <div  class="order-price">
+                              总价：<em class="muted">￥</em><span id="order-total">@cart.TotalPrice.ToString("G")</span>
+                            </div>
+                            <div class="span2 pull-right">
+                                <a class="btn btn-success btn-large btn-block" href="javascript:void(0)" onclick="formsubmit()">提交订单</a>
+                            </div>
+                        </div>
+                        
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/cart.js"></script>

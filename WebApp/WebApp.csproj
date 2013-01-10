@@ -280,6 +280,7 @@
     <Content Include="js\bootstrap-typeahead.js" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\cart.js" />
     <Content Include="js\jquery-ui.js" />
     <Content Include="js\jquery.galleriffic.js" />
     <Content Include="js\jquery.js" />
@@ -321,6 +322,8 @@
     <Content Include="Views\material\material.cshtml" />
     <Content Include="Views\Account\login.cshtml" />
     <Content Include="Views\Account\Me.cshtml" />
+    <Content Include="Views\Account\cart.cshtml" />
+    <Content Include="Views\Shared\cartempty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

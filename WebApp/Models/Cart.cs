@@ -62,6 +62,7 @@ namespace TextileCity.Models
         public Cart(int uid)
         {
             this.uid = uid;
+            
         }
 
         public Cart()
@@ -69,14 +70,26 @@ namespace TextileCity.Models
         {
         }
 
-        
+        public DetailItem GetItem(string id)
+        {
+            DetailItem itemResult = null;
+            foreach (DetailItem item in orderList)
+            {
+                if (item.ID == id)
+                {
+                    itemResult = item;
+                    break;
+                }
+            }
+            return itemResult;
+        }
 
         public void Add(DetailItem item)
         {
             orderList.Add(item);
         }
 
-        public bool Delet(string id)
+        public bool Delete(string id)
         {
             bool result = false;
             foreach (DetailItem item in orderList)
@@ -122,23 +135,97 @@ namespace TextileCity.Models
             decimal total = 0;
             foreach (DetailItem item in orderList)
             {
-                total += item.Price*item.Count;
+                total += (item.Price+item.StylePrice)*item.Count;
             }
             return total;
         }
 
-        public bool RefreshPrice()
+        public bool RefreshDbData()
         {
-            bool change = false;
+            bool change = true;
+            if (orderList.Count <= 0)
+            {
+                return false;
+            }
+            Dictionary<int, Material> models = new Dictionary<int, Material>();
+            Dictionary<int, Style> stylePrices = new Dictionary<int, Style>();
+            Dictionary<int, Craft> craftPrices = new Dictionary<int, Craft>();
+            List<int> ids = new List<int>();
+            List<int> styleIDs = new List<int>();
+            List<int> craftIDs = new List<int>();
 
             foreach (DetailItem item in orderList)
             {
-                
+                ids.Add(item.MaterialID);
+                if (item.Type == CategoryType.Accessory)
+                {
+                    styleIDs.Add(item.Style);
+                }
+                else
+                {
+                    craftIDs.Add(item.Craft);
+                }
+            }
+
+            MaterialOperation mop = new MaterialOperation();
+            List<Material> materials = mop.GetList(ids);
+            foreach (Material material in materials)
+            {
+                models.Add(material.MaterialID, material);
+            }
+
+            StyleOperation sop = new StyleOperation();
+            List<Style> styles = sop.GetList(styleIDs);
+            foreach (Style s in styles)
+            {
+                stylePrices.Add(s.StyleID, s);
+            }
+
+            CraftOperation cop = new CraftOperation();
+            List<Craft> crafts = cop.GetMinList(craftIDs);
+            foreach (Craft c in crafts)
+            {
+                craftPrices.Add(c.CraftID, c);
+            }
+
+            foreach (DetailItem item in orderList)
+            {
+                Material m = models[item.MaterialID];
+                item.Image = m.MainImage;
+                item.Name = m.Name;
+                if (item.Type == CategoryType.Fabric)
+                {
+                    Craft craftObj = craftPrices[item.Craft];
+                    item.StylePrice = craftObj.Price;
+                    item.CraftName = craftObj.Name;
+                    switch (item.Style)
+                    {
+                        case 1:
+                            item.Price = m.Price;
+                            item.StyleName = "本色";
+                            break;
+                        case 2:
+                            item.Price = m.PriceHigh;
+                            item.StyleName = "高色";
+                            break;
+                        case 3:
+                            item.Price = m.PriceFancy;
+                            item.StyleName = "多彩";
+                            break;
+                    }
+                }
+                else
+                {
+                    item.Price = 0.00m;
+                    Style styleObj = stylePrices[item.Style];
+                    item.StylePrice = styleObj.Price;
+                    item.StyleName = styleObj.Name;
+                }
             }
             return change;
         }
 
-
+        public 
     }
 
 

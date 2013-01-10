@@ -215,6 +215,26 @@ namespace TextileCity.DataAccess
 			return model;
 		}
 
+        public DataSet GetList(List<int> ids)
+        {
+            DataSet ds = null;
+            if (ids.Count > 0)
+            {
+                string strids = "";
+                foreach (int id in ids)
+                {
+                    strids += string.Format("{0},",id);
+                }
+                strids = strids.Remove(strids.Length - 1, 1);
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append("select styleid,material_id,name,price,code,rgb,scheme ");
+                strSql.Append(" FROM style ");
+                strSql.AppendFormat(" WHERE styleid in ({0}) ", strids);
+                ds = MysqlHelper.ExecuteDataSet(strSql.ToString());
+            }
+            return ds;
+        }
+
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>

@@ -133,6 +133,30 @@ namespace TextileCity.Operation
             return user;
         }
 
+
+        public int Register(string userName, string password, string email)
+        {
+            if (!Common.FormatValidation.VerifyName(userName))
+                return -3;
+            if (!Common.FormatValidation.VerifyEmail(email))
+                return -4;
+            if (!Common.FormatValidation.VerifyPassword(password))
+                return -5;
+            if (dal.ExistsAccount(userName))
+                return -1;
+            if (dal.ExistsEmail(email))
+                return -2;
+            User user = new User();
+            user.Account = userName;
+            user.Email = email;
+            user.Password = password;
+            user.State = 1;
+            user.RegisterTime = DateTime.Now;
+            if (dal.Add(user))
+                return 1;
+            else
+                return 0;
+        }
 		/// <summary>
 		/// 得到一个对象实体，从缓存中
 		/// </summary>

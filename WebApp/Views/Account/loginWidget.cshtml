@@ -2,14 +2,9 @@
     int itemsCount = (int)ViewBag.ItemsCount;
 }
 <div class="pull-right">
-    <a href="/account/cart" class="btn cart btn-link  mar-r30 "><i class="icon-cart-s"></i>购物车
-        @{
-            if(itemsCount>0)
-            {
-                <span class="badge badge-important">@itemsCount</span>
-            }
-        }
-    </a>     
-    <a class="btn btn-primary mar-r10" href="/account/login">登录</a>                
+    <a href="/account/cart" class="btn cart btn-link  mar-r30"><i class="icon-cart-s"></i>购物车
+      <span class="badge badge-important" id="top-cart-count">@string.Format("{0}", itemsCount > 0 ? itemsCount.ToString() : "")</span>
+    </a>
+    <a class="btn btn-primary mar-r10" href="/account/login">登录</a>
     <a class="btn btn btn-success" href="/account/register">注册</a>
 </div>

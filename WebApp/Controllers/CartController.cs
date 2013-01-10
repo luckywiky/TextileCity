@@ -52,16 +52,17 @@ namespace WebApp.Controllers
                 item.Count = count;
                 if (model != null)
                 {
+                    item.StylePrice = craftModel.Price;
                     switch (styleID)
                     {
                         case 1:
-                            item.Price = model.Price + craftModel.Price;
+                            item.Price = model.Price ;
                             break;
                         case 2:
-                            item.Price = model.PriceHigh+craftModel.Price;
+                            item.Price = model.PriceHigh;
                             break;
                         case 3:
-                            item.Price = model.PriceFancy+craftModel.Price;
+                            item.Price = model.PriceFancy;
                             break;
                     }
                     if (item.Price > 0)
@@ -76,6 +77,14 @@ namespace WebApp.Controllers
             return json;
         }
 
+        public JsonResult All()
+        {
+            JsonResult json = new JsonResult();
+            json.Data = MyCart;
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            json.ContentEncoding = System.Text.Encoding.UTF8;
+            return json;
+        }
 
         public JsonResult AddAccessory()
         {
@@ -104,8 +113,8 @@ namespace WebApp.Controllers
                 model = sop.GetModel(styleID);
                 if (model != null)
                 {
-                    item.Price = model.Price;
-                    if (item.Price > 0)
+                    item.StylePrice = model.Price;
+                    if (item.StylePrice > 0)
                     {
                         MyCart.Add(item);
                         json.Data = new { flag = 1, count = MyCart.Orders.Count, total = MyCart.TotalPrice };
@@ -115,6 +124,69 @@ namespace WebApp.Controllers
             json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             json.ContentEncoding = System.Text.Encoding.UTF8;
             return json;
+        }
+
+        public JsonResult Delete(string id)
+        {
+            bool result = MyCart.Delete(id);
+            JsonResult json = new JsonResult();
+            if (result)
+            {
+                json.Data = new { result = 1, total = MyCart.TotalPrice.ToString("G") };
+            }
+            else
+            {
+                json.Data = new { result = 0 };
+            }
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            json.ContentEncoding = System.Text.Encoding.UTF8;
+            return json;
+        }
+
+        public JsonResult ChangeCount()
+        {
+       
+            string id = Request["id"];
+            int count = 0;
+            string strCount =Request["count"];
+            int.TryParse(strCount, out count);
+            JsonResult json = new JsonResult();
+            json.Data = new { result = 0 };
+            try
+            {
+                if (count > 0)
+                {
+                    DetailItem itemResult = MyCart.GetItem(id);
+                    if (itemResult != null)
+                    {
+                        itemResult.Count = count;
+                        json.Data = new { result = 1, 
+                            price = itemResult.TotalPrice.ToString("G"), 
+                            itemTotal = itemResult.Total.ToString("G"),
+                            total = MyCart.TotalPrice.ToString("G")
+                        };
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                json.Data = new { result = 0 ,msg=ex.ToString()};
+            }
+            json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            json.ContentEncoding = System.Text.Encoding.UTF8;
+            return json;
+        }
+
+        public ActionResult Save(FormCollection form)
+        {
+            if (MyCart.Orders.Count <= 0)
+            {
+                return View("cartempty");
+            }
+            else
+            {
+
+            }           
         }
     }
 }

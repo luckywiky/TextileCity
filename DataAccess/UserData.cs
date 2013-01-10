@@ -31,6 +31,31 @@ namespace TextileCity.DataAccess
 			return MysqlHelper.Exists(strSql.ToString(),parameters);
 		}
 
+        public bool ExistsAccount(string account)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from user");
+            strSql.Append(" where account=?account");
+            MySqlParameter[] parameters = {
+					new MySqlParameter("?account", MySqlDbType.VarChar,20)
+			};
+            parameters[0].Value = account;
+
+            return MysqlHelper.Exists(strSql.ToString(), parameters);
+        }
+
+        public bool ExistsEmail(string email)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) from user");
+            strSql.Append(" where email=?email");
+            MySqlParameter[] parameters = {
+					new MySqlParameter("?email", MySqlDbType.VarChar,20)
+			};
+            parameters[0].Value = email;
+
+            return MysqlHelper.Exists(strSql.ToString(), parameters);
+        }
 
 		/// <summary>
 		/// 增加一条数据

@@ -21,6 +21,26 @@ namespace WebApp.Controllers
             return View();
         }
 
+        //[UserAuth()]
+        public ActionResult Cart()
+        {
+            if (MyCart.Orders.Count <= 0)
+            {
+                return View("cartempty");
+            }
+            else
+            {
+                TextileCity.Entity.User user = Session["LoginUser"] as TextileCity.Entity.User;
+                if(user!=null)
+                    MyCart.Uid = user.Uid;
+                Cart cart = MyCart;
+                cart.RefreshDbData();
+                ViewData["Cart"] = cart;
+                ViewBag.NaviCss.Current = TextileCity.Models.Navigation.Account;
+                return View();
+            }
+        }
+
         [HttpGet]
         public ActionResult Login()
         {
@@ -98,7 +118,16 @@ namespace WebApp.Controllers
             {
                 Session.Remove("LoginUser");
             }
+            if (Session["Cart"] != null)
+            {
+                Session.Remove("Cart");
+            }
             return RedirectToAction("Login");
+        }
+
+        public ActionResult Register()
+        {
+            return View("register");
         }
 
         public ActionResult LoginWidget()

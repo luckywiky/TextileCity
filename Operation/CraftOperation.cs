@@ -95,6 +95,10 @@ namespace TextileCity.Operation
 		{
 			return dal.GetList(strWhere);
 		}
+
+       
+
+
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
@@ -124,6 +128,17 @@ namespace TextileCity.Operation
 			}
 			return modelList;
 		}
+
+        public List<Craft> GetMinList(List<int> ids)
+        {
+            List<Craft> crafts = new List<Craft>();
+            DataSet ds = dal.GetMinList(ids);
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                crafts = DataTableToList(ds.Tables[0]);
+            }
+            return crafts;
+        }
 
 
         public List<Craft> GetMinList()
