@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TextileCity.Entity;
 
 namespace TextileCity.Models
 {
@@ -135,6 +136,24 @@ namespace TextileCity.Models
             {
                 return (Price + StylePrice) * Count;
             }
+        }
+
+
+        public OrderItem ToOrderItem(int orderid)
+        {
+            OrderItem orderItem = new OrderItem();
+            orderItem.OrderID = orderid;
+            orderItem.AddTime = DateTime.Now;
+            orderItem.Count = Count;
+            orderItem.CraftID = Craft;
+            orderItem.MaterialID = MaterialID;
+            //orderItem.Remark = Remark;
+            orderItem.State = OrderItemState.MakingUp;
+            orderItem.StyleID = Style;
+            orderItem.Type = Type;
+            orderItem.StyleName = StyleName;
+            orderItem.Total = Total;
+            return orderItem;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace WebApp.Controllers
             return View();
         }
 
-        //[UserAuth()]
+        [UserAuth()]
         public ActionResult Cart()
         {
             if (MyCart.Orders.Count <= 0)
@@ -31,12 +31,13 @@ namespace WebApp.Controllers
             else
             {
                 TextileCity.Entity.User user = Session["LoginUser"] as TextileCity.Entity.User;
-                if(user!=null)
+                if (user != null)
                     MyCart.Uid = user.Uid;
                 Cart cart = MyCart;
                 cart.RefreshDbData();
                 ViewData["Cart"] = cart;
                 ViewBag.NaviCss.Current = TextileCity.Models.Navigation.Account;
+                //ViewData["Users"] = user;
                 return View();
             }
         }
@@ -58,7 +59,7 @@ namespace WebApp.Controllers
         public ActionResult Login(FormCollection form)
         {
             bool success = false;
-            string message=string.Empty;
+            string message = string.Empty;
             string account = string.Empty;
             string password = string.Empty;
             if (!string.IsNullOrEmpty(form["inputAccount"]))
@@ -66,8 +67,8 @@ namespace WebApp.Controllers
                 account = form["inputAccount"];
                 password = form["inputPassword"];
                 UserOperation uop = new UserOperation();
-                int result =-1;
-                TextileCity.Entity.User loginUser = uop.Login(account,password,out result);
+                int result = -1;
+                TextileCity.Entity.User loginUser = uop.Login(account, password, out result);
                 switch (result)
                 {
                     case -3:
@@ -86,8 +87,8 @@ namespace WebApp.Controllers
                         if (loginUser != null)
                         {
                             Session.Timeout = 60;
-                            Session["LoginUser"] = loginUser;                          
-                            success = true;                          
+                            Session["LoginUser"] = loginUser;
+                            success = true;
                         }
                         else
                         {
@@ -129,10 +130,113 @@ namespace WebApp.Controllers
         {
             return View("register");
         }
+        public ActionResult AOrders()
+        {
+            return View();
+        }
+
+         [UserAuth()]
+        public ActionResult Orders(string type = "latest", int page = 1)
+        {
+            string[] types = new string[] { "latest", "all", OrderState.MakingUp, OrderState.Delivering, OrderState.Delivered };
+            type = type.ToLower();
+            if (types.Contains(type))
+            {
+                try
+                {
+                    OrderOperation oop = new OrderOperation();
+                    List<Order> orders = new List<Order>();
+                    TextileCity.Entity.User loginUser = Session["LoginUser"] as TextileCity.Entity.User;
+                    switch (type)
+                    {
+                        case "all":
+                            ViewData["Navi"] = 1;
+                            if (page > 0)
+                            {
+                                int count = 0;
+                                orders = oop.GetOrders(loginUser.Uid, page, 10, out count);
+                                Pager pager = new Pager(page, count, 10);
+                                pager.CreatePager();
+                                ViewData["Pager"] = pager;
+                            }
+                            else
+                            {
+                                throw new Exception();
+                            }
+                            break;
+                        case "latest":
+                            ViewData["Navi"] = 0;
+                            orders = oop.GetMinOrders(loginUser.Uid);
+                            break;
+                        case OrderState.MakingUp:
+                            ViewData["Navi"] = 2;
+                            if (page > 0)
+                            {
+                                int count = 0;
+                                orders = oop.GetOrders(loginUser.Uid, type, page, 10, out count);
+                                Pager pager = new Pager(page, count, 10);
+                                pager.CreatePager();
+                                ViewData["Pager"] = pager;
+                            }
+                            else
+                            {
+                                throw new Exception();
+                            }
+                            break;
+                        case OrderState.Delivering:
+                            ViewData["Navi"] = 3;
+                            if (page > 0)
+                            {
+                                int count = 0;
+                                orders = oop.GetOrders(loginUser.Uid, type, page, 10, out count);
+                                Pager pager = new Pager(page, count, 10);
+                                pager.CreatePager();
+                                ViewData["Pager"] = pager;
+                            }
+                            else
+                            {
+                                throw new Exception();
+                            }
+                            break;
+                        case OrderState.Delivered:
+                            ViewData["Navi"] = 4;
+                            if (page > 0)
+                            {
+                                int count = 0;
+                                orders = oop.GetOrders(loginUser.Uid, type, page, 10, out count);
+                                Pager pager = new Pager(page, count, 10);
+                                pager.CreatePager();
+                                ViewData["Pager"] = pager;
+                            }
+                            else
+                            {
+                                throw new Exception();
+                            }
+                            break;
+                    }
+
+                    ViewData["Type"] = type;
+                    ViewData["Orders"] = orders;
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                   // return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
+                }
+                ViewBag.NaviCss.Current = TextileCity.Models.Navigation.Account;
+                return View();
+            }
+            else
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
+            }
+        }
+
+
 
         public ActionResult LoginWidget()
         {
-            
+
             if (Session != null && Session["Cart"] != null)
             {
                 Cart cart = Session["Cart"] as Cart;

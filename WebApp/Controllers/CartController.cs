@@ -185,7 +185,17 @@ namespace WebApp.Controllers
             }
             else
             {
-
+                if (Session["LoginUser"] == null)
+                {
+                    return RedirectToAction("login", "Account");
+                }
+                else
+                {
+                    if(MyCart.SaveToDB())
+                        return RedirectToAction("Orders", "Account");
+                    else
+                        return RedirectToAction("Cart", "Account");
+                }
             }           
         }
     }

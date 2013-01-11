@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using TextileCity.Entity;
+@{
+    string[] leftNaviCss = new string[5] { "", "", "", "", "" };
+    int navi = 0;
+    if(ViewData["Navi"]!=null)
+    {
+        navi = (int)ViewData["Navi"];
+    }
+    leftNaviCss[navi] = "active";
+}
+<div class="container">
+    <div class="row">
+        <div class="span2 well left-navi">
+            <ul class="nav nav-list">
+                <li class="nav-header">我的订单</li>
+                <li class="@leftNaviCss[0]"><a href="/account/orders">最近订单</a></li>
+                <li class="@leftNaviCss[1]"><a href="/account/orders/all">全部订单</a></li>
+                <li class="nav-header">按状态查找</li>
+                <li class="@leftNaviCss[2]"><a href="/account/orders/@OrderState.MakingUp">备货中</a></li>
+                <li class="@leftNaviCss[3]"><a href="/account/orders/@OrderState.Delivering">配送中</a></li>
+                <li class="@leftNaviCss[4]"><a href="/account/orders/@OrderState.Delivered">已配送</a></li>
+            </ul>
+        </div>
+        <div class="span9">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/">轻纺城</a> <span class="divider">/</span>
+                </li>
+                <li>
+                    <a href="/account/me">个人中心</a> <span class="divider">/</span>
+                </li>
+                <li class="active">我的订单</li>
+            </ul>
+            <div class="row mar-left0 ">
+                <div class="well ">
+                    @{
+                        List<Order> orders = new List<Order>();
+                        if (ViewData["Orders"] != null)
+                        {
+                            orders = ViewData["Orders"] as List<Order>;
+                        }
+                        if (orders == null || orders.Count <= 0)
+                        {
+                        <div class="empty  well-large">
+                            <h3 class="font-color-red">还没有订单哦</h3>
+                            <p>
+                                你可以去挑选 <a href="/textile/fabric" class="link-red">面料</a>，或者去看看有什么好的 <a href="/textile/accessory" class="link-red">辅料</a>
+                            </p>
+                            <p>
+                                有什么问题可以联系我们
+                            </p>
+                            <p>电话：13570537950</p>
+                            <p>QQ：<span>3137622</span><span>1220922279</span></p>
+                        </div>
+                        }
+                        else
+                        {
+                        <table class="table table-striped ">
+                            <thead>
+                                <tr>
+                                    <th class="span1">编号</th>
+                                    <th class="span1">状态</th>
+                                    <th class="span2">总价</th>
+                                    <th class="span2">下单时间</th>
+                                    <th class="span1">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                            foreach (Order order in orders)
+                            {
+                                    <tr>
+                                        <td>@order.OrderID</td>
+                                        <td>@order.OrderState</td>
+                                        <td>@order.Total.ToString("G")</td>
+                                        <td>@order.AddTime</td>
+                                        <td><a href="#">查看</a></td>
+                                    </tr>
+                            }
+                                }
+
+                            </tbody>
+                        </table>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

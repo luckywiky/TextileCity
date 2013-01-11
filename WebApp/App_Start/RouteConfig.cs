@@ -30,6 +30,16 @@ namespace WebApp
               constraints: new { id = @"\d+" }
               );
             routes.MapRoute(
+              name: "Orders",
+              url: "Account/Orders/{type}",
+              defaults: new { controller = "Account", action = "Orders", type = UrlParameter.Optional }
+             );
+            routes.MapRoute(
+              name: "OrdersRoot",
+              url: "Account/Orders",
+              defaults: new { controller = "Account", action = "Orders", type = "latest" }
+             );
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

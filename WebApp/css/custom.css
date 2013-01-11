@@ -1110,3 +1110,10 @@ padding: 8px 15px !important;
 .empty span{
     margin-right:20px;
 }
+.mar-left0{
+    margin-left:0 !important;
+}
+
+.left-navi{
+    padding-bottom:50px;
+}

@@ -225,7 +225,48 @@ namespace TextileCity.Models
             return change;
         }
 
-        public 
+        public bool SaveToDB()
+        {
+            if (uid <= 0)
+                return false;
+            if (orderList.Count <= 0)
+                return false;
+            Order order = new Order();
+            order.Uid = uid;
+            order.OrderState = OrderState.MakingUp;
+            DateTime now = DateTime.Now;
+            order.Number = string.Format("{0}{1}{2}{3}{4}{5}{6}{7}", uid, now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, now.Millisecond);
+            order.Total = TotalPrice;
+            order.Address = Address;
+            order.AddTime = DateTime.Now;
+            order.LinkMan = LinkMan;
+            order.Phone = Phone;
+
+            OrderOperation orderop = new OrderOperation();
+            int orderid = orderop.Add(order);
+            int rows =0;
+            bool result =false;
+            if (orderid > 0)
+            {
+                List<OrderItem> orderItems = new List<OrderItem>();
+                foreach (DetailItem detail in orderList)
+                {
+                    OrderItem item = detail.ToOrderItem(orderid);
+                    orderItems.Add(item);
+                }
+                OrderItemOperation oiop = new OrderItemOperation();
+                rows = oiop.AddList(orderItems);
+                if (rows > 0)
+                {
+                    result = true;
+                }
+                else
+                {
+                    orderop.Delete(orderid);
+                }
+            }
+            return result;
+        }
     }
 
 

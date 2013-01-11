@@ -201,6 +201,7 @@
     <Content Include="css\custom.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <None Include="Properties\PublishProfiles\TextileCity.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="images\bg-bot-tail.gif" />
     <Content Include="images\bg-top-shadow.png" />
@@ -324,6 +325,9 @@
     <Content Include="Views\Account\Me.cshtml" />
     <Content Include="Views\Account\cart.cshtml" />
     <Content Include="Views\Shared\cartempty.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Account\orders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
