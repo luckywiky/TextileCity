@@ -184,17 +184,28 @@ namespace WebApp.Controllers
                 return View("cartempty");
             }
             else
-            {
+            {              
                 if (Session["LoginUser"] == null)
                 {
                     return RedirectToAction("login", "Account");
                 }
                 else
                 {
-                    if(MyCart.SaveToDB())
+                    MyCart.LinkMan = form["input-name"];
+                    MyCart.Phone = form["input-phone"];
+                    if (form["delivery-type"] == "2")
+                    {
+                        MyCart.Address = form["input-address"];
+                    }
+                    if (MyCart.SaveToDB())
+                    {
+                        MyCart.Orders.Clear();
                         return RedirectToAction("Orders", "Account");
+                    }
                     else
+                    {
                         return RedirectToAction("Cart", "Account");
+                    }
                 }
             }           
         }

@@ -6,6 +6,8 @@
 @using TextileCity.Entity;
 @{
     Cart cart = ViewData["Cart"] as Cart;
+   
+    TextileCity.Entity.User user = ViewData["User"] as TextileCity.Entity.User;
 }
 <div class="container">
     <div class="row">
@@ -36,12 +38,12 @@
                         <div class="row">
                             <div class="span3">
                                 <label>联系人</label>
-                                <input type="text" class="input-block-level" rel="popover"  data-placement="left" id="input-name"  name="input-name" placeholder="您的姓名">
+                                <input type="text" class="input-block-level" rel="popover" value="@user.Name"  data-placement="left" id="input-name"  name="input-name" placeholder="您的姓名">
                               
                             </div>
                             <div class="span3">
                                 <label>电话</label>
-                                <input type="text" class="input-block-level" rel="popover"  data-placement="right" id="input-phone"  name="input-phone" placeholder="您的电话">
+                                <input type="text" class="input-block-level" rel="popover" value="@user.Phone"  data-placement="right" id="input-phone"  name="input-phone" placeholder="您的电话">
                               
                             </div>
                            
@@ -67,7 +69,7 @@
                     </div>
                     <div class="item-clock">
                         <label>地址</label>
-                        <input type="text" class="input-block-level" id="input-address"  rel="popover" data-placement="bottom" name="input-address" placeholder="收货详细地址">
+                        <input type="text" class="input-block-level" id="input-address"  rel="popover" value="@user.Address" data-placement="bottom" name="input-address" placeholder="收货详细地址">
                          <div class=""  >
                                 <label class="checkbox" >
                                     <input type="checkbox" id="cb-save-addr"  onchange="saveAddrChage()"/><span>保存到我的收货地址</span>

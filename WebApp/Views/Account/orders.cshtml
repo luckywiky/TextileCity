@@ -74,10 +74,10 @@
                             foreach (Order order in orders)
                             {
                                     <tr>
-                                        <td>@order.OrderID</td>
+                                        <td>@order.Number</td>
                                         <td>@order.OrderState</td>
                                         <td>@order.Total.ToString("G")</td>
-                                        <td>@order.AddTime</td>
+                                        <td>@order.AddTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
                                         <td><a href="#">查看</a></td>
                                     </tr>
                             }

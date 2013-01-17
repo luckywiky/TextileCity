@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    string message = "";
+    string account = string.Empty;
+    string email = string.Empty;
+    if (ViewData["Message"] != null)
+    {
+        message = ViewData["Message"].ToString();
+    }
+    if (ViewData["Account"] != null)
+    {
+        account = ViewData["Account"].ToString();
+    }
+    if (ViewData["Email"] != null)
+    {
+        email = ViewData["Email"].ToString();
+    }
+}
+<div class="container">
+    <div class="row">
+        <div class="well span6 offset3 login-form">
+            <form class="form-horizontal" id="form_login" name="form_login" action="register" method="post" onkeydown="submitByEnter()">
+                <fieldset>
+                    <legend>注册<a class="no-register" href="login" rel="tooltip" data-placement="left"
+                        title="已经有账号">已经有账号？快去登录吧</a></legend>
+                    @{                                                                                                                   
+                        if (!string.IsNullOrEmpty(message))
+                        {
+                        <div class="err-msg  alert alert-error" id="msg">
+                            @message
+                        </div>
+                        }                       
+                    }
+                    <div class="control-group">
+                        <label class="control-label" for="inputAccount">账号：</label>
+                        <div class="controls">                             
+                            <input type="text" id="inputAccount" name="inputAccount" value="@account" placeholder="5-15位的英文字母或下划线">
+                            <div class="text-info input-msg">5-15位的英文字母或下划线</div>
+                        </div>
+                    </div>
+                      <div class="control-group">
+                        <label class="control-label" for="inputAccount">邮箱：</label>
+                        <div class="controls">
+                            <input type="text" id="inputEmail" name="inputEmail" value="@email" placeholder="您常用的邮箱">
+                            <div class="text-info input-msg">可用邮箱登录或者找回密码</div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputPassword">密码：</label>
+                        <div class="controls">
+                            <input type="password" id="inputPassword" name="inputPassword" placeholder="5-20位密码">
+                            <div class="text-info input-msg">密码长度为5-20位字符</div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <a class="btn  btn-red" onclick="register()" href="javascript:void(0)">注册</a>                           
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <div id="myModal" class="modal alert-error   hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header ">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">错误</h3>
+                </div>
+                <div class="modal-body">
+                    <p id="err_msg"></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">我知道了</button>
+                </div>
+            </div>
+            <script>               
+                $('.no-register').tooltip();
+                function submitByEnter() {
+                    if (event.keyCode == 13) {
+                        register();
+                    }
+                }
+                function register() {
+                    var regxPwd = /^[\@@A-Za-z0-9\!\#\$\%\^\&\*\.\~\-\+\=\'\:\,\[\]\{\}\(\)\?\/\<\>\`\""]{5,25}/;
+                    var acc = $('#inputAccount').val();
+                    var email = $('#inputEmail').val();
+                    var pwd = $('#inputPassword').val();
+                    
+                    if (acc == '') {
+                        $('#err_msg').html('用户名不能为空');
+                        $('#myModal').modal('show');
+                        return false;
+                    }
+                    if (email == '') {
+                        $('#err_msg').html('邮箱不能为空');
+                        $('#myModal').modal('show');
+                        return false;
+                    }
+                    if (!regxPwd.test(pwd)) {
+                        $('#err_msg').html('密码长度必须为5-25位！');
+                        $('#myModal').modal('show');
+                        return false;
+                    }
+                    $('#form_login').submit();
+                }
+            </script>
+        </div>
+    </div>
+</div>

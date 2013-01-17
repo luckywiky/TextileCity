@@ -37,7 +37,7 @@ namespace WebApp.Controllers
                 cart.RefreshDbData();
                 ViewData["Cart"] = cart;
                 ViewBag.NaviCss.Current = TextileCity.Models.Navigation.Account;
-                //ViewData["Users"] = user;
+                ViewData["User"] = user;
                 return View();
             }
         }
@@ -130,9 +130,76 @@ namespace WebApp.Controllers
         {
             return View("register");
         }
-        public ActionResult AOrders()
+
+        [HttpPost]
+        public ActionResult Register(FormCollection form)
         {
-            return View();
+            bool success = false;
+            string message = string.Empty;
+            string account = string.Empty;
+            string email = string.Empty;
+            string password = string.Empty;
+            if (!string.IsNullOrEmpty(form["inputAccount"]))
+            {
+                account = form["inputAccount"];
+                email = form["inputEmail"];
+                password = form["inputPassword"];
+                UserOperation uop = new UserOperation();
+                int result = -1;
+                TextileCity.Entity.User loginUser = null;
+                result = uop.Register(account, password, email);
+                if (result > 0)
+                {
+                    loginUser = uop.Login(account,password,out result);
+                    if (loginUser != null)
+                    {
+                        Session.Timeout = 60;
+                        Session["LoginUser"] = loginUser;
+                        success = true;
+                    }
+                    else
+                    {
+                        message = "未知错误";
+                    }
+                }
+                else
+                {
+                    switch (result)
+                    {
+                        case -3:
+                            message = "账号格式不正确";
+                            
+                            break;
+                        case -4:
+                            message = "邮箱格式不正确";
+                            break;
+                        case -5:
+                            message = "密码格式不正确";
+                            break;
+                        case -2:
+                            message = "不能使用该邮箱";
+                            break;
+                        case -1:
+                            message = "不能使用该用户名";
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                message = "账号不能为空！";
+            }
+            if (success)
+            {
+                return new RedirectResult("/account/me");
+            }
+            else
+            {
+                ViewData["Message"] = message;
+                ViewData["Account"] = account;
+                ViewData["Email"] = email;
+                return View();
+            }
         }
 
          [UserAuth()]

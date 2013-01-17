@@ -38,7 +38,7 @@ namespace Common
             }
             else
             {
-                Regex regex = new Regex(@"^[A-Za-z][A-Za-z0-9_]{4,19}");
+                Regex regex = new Regex(@"[A-Za-z0-9_]{5,20}$");
                 result = regex.IsMatch(userName);
             }
             return result;
@@ -53,7 +53,7 @@ namespace Common
             }
             else
             {
-                Regex regex = new Regex(@"^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~\-\+\=\'\:\,\[\]\{\}\(\)\?\/\<\>\`\""]{4,19}");
+                Regex regex = new Regex(@"^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~\-\+\=\'\:\,\[\]\{\}\(\)\?\/\<\>\`\""]{4,19}$");
                 result = regex.IsMatch(password);
                 return result;
             }

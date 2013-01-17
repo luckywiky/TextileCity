@@ -148,6 +148,7 @@ namespace TextileCity.Operation
                 return -2;
             User user = new User();
             user.Account = userName;
+            user.Name = userName;
             user.Email = email;
             user.Password = password;
             user.State = 1;

@@ -47,6 +47,7 @@
     <Compile Include="CategoryData.cs" />
     <Compile Include="CraftData.cs" />
     <Compile Include="MaterialData.cs" />
+    <Compile Include="NewsData.cs" />
     <Compile Include="OrderData.cs" />
     <Compile Include="OrderItemData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

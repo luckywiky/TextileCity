@@ -43,6 +43,7 @@
     <Compile Include="CategoryOperation.cs" />
     <Compile Include="CraftOperation.cs" />
     <Compile Include="MaterialOperation.cs" />
+    <Compile Include="NewsOperation.cs" />
     <Compile Include="OrderItemOperation.cs" />
     <Compile Include="OrderOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

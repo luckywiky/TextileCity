@@ -21,7 +21,7 @@ namespace TextileCity.Entity
         private string _phone = string.Empty;
         private string _company = string.Empty;
         private string _address = string.Empty;
-        private string _sex = string.Empty;
+        private string _sex = SexType.Male;
 		private DateTime _register_time;
 		/// <summary>
 		/// auto_increment
@@ -112,6 +112,11 @@ namespace TextileCity.Entity
 			get{return _register_time;}
 		}
 		#endregion Model
-
 	}
+
+    public class SexType
+    {
+        public const string Male = "先生";
+        public const string Female = "女士";
+    }
 }

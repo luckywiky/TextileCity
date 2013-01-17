@@ -40,11 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Address.cs" />
+    <Compile Include="Admin.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="CategoryCollection.cs" />
     <Compile Include="CategoryType.cs" />
     <Compile Include="Craft.cs" />
     <Compile Include="Material.cs" />
+    <Compile Include="News.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderItemcs.cs" />
     <Compile Include="OrderState.cs" />

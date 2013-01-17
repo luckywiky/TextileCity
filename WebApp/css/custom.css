@@ -342,6 +342,7 @@
     background-repeat: no-repeat;
     background-position: 0 0;
     margin-right: 5px;
+    margin-top:4px;
 }
 
 /* -- gallery  begin --*/
@@ -1116,4 +1117,36 @@ padding: 8px 15px !important;
 
 .left-navi{
     padding-bottom:50px;
+}
+
+.input-msg{
+    padding-top:5px;
+    font-size:14px;
+    line-height:14px;
+    color:#890000;
+}
+
+.index h2 {
+    font-size: 24px;
+    line-height: 32px;
+    color: #890000;
+    word-spacing: 1em;
+    text-indent:32px;
+    font-weight:bold;
+}
+.index h3{
+      font-size:16px;
+    line-height:24px;
+    color:#890000;
+    text-indent:32px;
+     font-weight:normal;
+}
+.index {
+    color: #ccc;
+    font-size: 16px;
+    line-height:24px;
+     text-indent: 32px;
+}
+.index div{
+    padding:5px 0;
 }
