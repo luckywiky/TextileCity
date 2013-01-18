@@ -1,0 +1,50 @@
+﻿@using TextileCity.Entity
+@{
+    News dataModel = new News();
+    if (ViewData["DataModel"] != null)
+    {
+        dataModel = ViewData["DataModel"] as News;
+    } 
+}
+<ul class="breadcrumb">
+    <li>
+        <a href="/">轻纺城</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="/news">新闻</a> <span class="divider">/</span>
+    </li>
+    <li class="active">@dataModel.Title</li>
+</ul>
+<div class="well">
+    <div class="news">
+        <h2>@dataModel.Title</h2>
+        <h5>@dataModel.AddTime</h5>
+        <div>
+            @Html.Raw(dataModel.Content)
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="thumbnail span5 ">
+            <img src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
+        </div>
+        <div class="span7">
+            <ul class="thumbnails  row-fluid">
+                <li class="span3">
+                    <div class="thumbnail  list_img">
+                        <img src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
+                    </div>
+                </li>
+                <li class="span3">
+                    <div class="thumbnail ">
+                        <img src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
+                    </div>
+                </li>
+                <li class="span3">
+                    <div class="thumbnail ">
+                        <img src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

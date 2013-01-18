@@ -10,7 +10,7 @@ namespace TextileCity.Operation
 {
     public class NewsOperation
     {
-        public static int NewsListSize = 10;
+        public static int NewsListSize = 12;
         private readonly NewsData dal = new NewsData();
         public NewsOperation()
 		{}

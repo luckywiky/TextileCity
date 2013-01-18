@@ -15,13 +15,13 @@ namespace WebApp
             routes.MapRoute(
              name: "MaterialType",
              url: "textile/{type}/{id}",
-             defaults: new { controller = "Textile", action = "Index",type = UrlParameter.Optional,id=UrlParameter.Optional }             
+             defaults: new { controller = "Textile", action = "Index", type = UrlParameter.Optional, id = UrlParameter.Optional }
             );
             routes.MapRoute(
              name: "List",
              url: "List/{categoryid}",
              defaults: new { controller = "Textile", action = "list" },
-             constraints: new { categoryid = @"\d+" }         
+             constraints: new { categoryid = @"\d+" }
             );
             routes.MapRoute(
                name: "Material",
@@ -34,11 +34,17 @@ namespace WebApp
               url: "Account/Orders/{type}",
               defaults: new { controller = "Account", action = "Orders", type = UrlParameter.Optional }
              );
+
             routes.MapRoute(
               name: "OrdersRoot",
               url: "Account/Orders",
               defaults: new { controller = "Account", action = "Orders", type = "latest" }
              );
+            //routes.MapRoute(
+            //     name: "NewsDetails",
+            //     url: "news/{id}",
+            //    defaults: new { controller = "News", action = "Details", id = UrlParameter.Optional }
+            // );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

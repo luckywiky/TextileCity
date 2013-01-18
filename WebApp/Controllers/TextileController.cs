@@ -35,7 +35,7 @@ namespace WebApp.Controllers
                         {
                             parentID = category.ParentID;
                             childID = category.CategoryID;
-                            currentID = childID;
+                            currentID = childID;                          
                         }
                         else
                         {
@@ -43,6 +43,7 @@ namespace WebApp.Controllers
                             childID = -1;
                             currentID = parentID;
                         }
+                        ViewBag.Title = string.Format("{0}-广州国际轻纺城", category.Name);
                         string strCategoryType = "";
                         switch (category.Type)
                         {
@@ -79,6 +80,7 @@ namespace WebApp.Controllers
                             parentID = category.CategoryID;
                             childID = -1;
                             currentID = parentID;
+                            ViewBag.Title = string.Format("{0}-广州国际轻纺城", category.Name);
                         }
                     }
 

@@ -238,7 +238,7 @@ namespace TextileCity.DataAccess
             StringBuilder strSql = new StringBuilder();
             string strCountSql = "select count(id) from news ";
             strSql.Append("select id,title,add_time ");
-            strSql.Append(" FROM news order by add_time desc ");
+            strSql.Append(" FROM news order by add_time desc ,id desc");
             int offset = 0;
             if (page > 1)
             {

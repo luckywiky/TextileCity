@@ -202,7 +202,7 @@ namespace WebApp.Controllers
             }
         }
 
-         [UserAuth()]
+        [UserAuth()]
         public ActionResult Orders(string type = "latest", int page = 1)
         {
             string[] types = new string[] { "latest", "all", OrderState.MakingUp, OrderState.Delivering, OrderState.Delivered };
@@ -299,7 +299,32 @@ namespace WebApp.Controllers
             }
         }
 
-
+        [UserAuth()]
+        public ActionResult Order(int id)
+        {
+            TextileCity.Entity.Order dataModel = new Order();
+            dataModel = new OrderOperation().GetModel(id);
+            TextileCity.Entity.User loginUser = Session["LoginUser"] as TextileCity.Entity.User;
+            if (dataModel != null && dataModel.Uid == loginUser.Uid)
+            {
+                List<OrderItem> items = new OrderItemOperation().GetItems(dataModel.OrderID);
+                ViewData["Items"] = items;
+                ViewData["DataModel"] = dataModel;
+                Dictionary<int, string> craftNames = new Dictionary<int, string>();
+                List<Craft> craftsList = new CraftOperation().GetMinList();
+                foreach (Craft c in craftsList)
+                {
+                    craftNames.Add(c.CraftID, c.Name);
+                }
+                ViewData["CraftNames"] = craftNames;
+                ViewBag.NaviCss.Current = TextileCity.Models.Navigation.Account;
+                return View();
+            }
+            else
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
+            }
+        }
 
         public ActionResult LoginWidget()
         {

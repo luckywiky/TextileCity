@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "orders";
+    ViewBag.Title = "我的订单-广州国际轻纺城";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using TextileCity.Entity;
@@ -74,11 +74,11 @@
                             foreach (Order order in orders)
                             {
                                     <tr>
-                                        <td>@order.Number</td>
+                                        <td><a href="/account/order/@order.OrderID">@order.Number</a></td>
                                         <td>@order.OrderState</td>
                                         <td>@order.Total.ToString("G")</td>
                                         <td>@order.AddTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                                        <td><a href="#">查看</a></td>
+                                        <td><a href="/account/order/@order.OrderID">查看</a></td>
                                     </tr>
                             }
                                 }

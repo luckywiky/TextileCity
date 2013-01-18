@@ -182,7 +182,7 @@ namespace TextileCity.Models
             }
 
             CraftOperation cop = new CraftOperation();
-            List<Craft> crafts = cop.GetMinList(craftIDs);
+            List<Craft> crafts = cop.GetMinList();
             foreach (Craft c in crafts)
             {
                 craftPrices.Add(c.CraftID, c);

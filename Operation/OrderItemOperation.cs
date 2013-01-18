@@ -147,6 +147,12 @@ namespace TextileCity.Operation
 			return modelList;
 		}
 
+        public List<OrderItem> GetItems(int orderid)
+        {
+            DataSet ds = dal.GetItems( orderid);
+            return DataTableToList(ds.Tables[0]);
+        }
+
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>

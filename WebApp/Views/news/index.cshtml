@@ -1,99 +1,62 @@
 ﻿@{
-    ViewBag.Title = "index";
+    ViewBag.Title = "新闻动态-广州国际轻纺城";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using TextileCity.Entity;
+@{
+    string next = "#";
+    string prev = "#";
+    List<News> news = new List<News>();
+    if (ViewData["Next"] != null)
+    {
+        next = ViewData["Next"].ToString();
+        next = string.Format("/news?page={0}", next);
+    }
+    if (ViewData["Prev"] != null)
+    {
+        prev = ViewData["Prev"].ToString();
+        prev = string.Format("/news?page={0}", prev);
+    }
+    if (ViewData["News"] != null)
+    {
+        news = ViewData["News"] as List<News>;
+    }
 }
 <div class="container">
     <div class="row">
-        <div class="span3  news_list">
-            <a href="aaa">
-                <div class=" well sidebar-nav news_item">
-                    阿四大打算打阿四大打算打阿四大打算打<span>[2012/12/25]</span>
-                </div>
-            </a>
-            <a href="aaa">
-                <div class=" well sidebar-nav news_item">
-                    阿四大打算打阿四大打算打阿四大打算打<span>[2012/12/25]</span>
-                </div>
-            </a>
-            <a href="aaa">
-                <div class=" well sidebar-nav news_item">
-                    阿四大打算打阿四大打算打阿四大打算打<span>[2012/12/25]</span>
-                </div>
-            </a>
-            <a href="aaa">
-                <div class=" well sidebar-nav news_item">
-                    阿四大打算打阿四大打算打阿四大打算打<span>[2012/12/25]</span>
-                </div>
-            </a>
-            <a href="aaa">
-                <div class=" well sidebar-nav news_item">
-                    阿四大打算打阿四大打算打阿四大打算打<span>[2012/12/25]</span>
-                </div>
-            </a>
-            <a href="aaa">
-                <div class=" well sidebar-nav news_item">
-                    阿四大打算打阿四大打算打阿四大打算打<span>[2012/12/25]</span>
-                </div>
-            </a>
-            <a href="aaa">
-                <div class=" well sidebar-nav news_item">
-                    阿四大打算打阿四大打算打阿四大打算打<span>[2012/12/25]</span>
-                </div>
-            </a>
-            <a href="aaa">
-                <div class=" well sidebar-nav news_item">
-                    阿四大打算打阿四大打算打阿四大打算打<span>[2012/12/25]</span>
-                </div>
-            </a>
-            <a href="aaa">
-                <div class=" well sidebar-nav news_item">
-                    阿四大打算打阿四大打算打阿四大打算打<span>[2012/12/25]</span>
-                </div>
-            </a>
-            <a href="aaa">
-                <div class=" well sidebar-nav news_item">
-                    阿四大打算打阿四大打算打阿四大打算打<span>[2012/12/25]</span>
-                </div>
-            </a>
-
-            <ul class="pager-a">
+        <div class="span4  news_list" >
+            <div id="news_list">
+            @{
+                foreach (News n in news)
+                {
+                <a href="/news/details/@n.ID">
+                    <div class="well sidebar-nav news_item">
+                        @n.Title<span>[@n.AddTime.ToString("yyyy/MM/dd")]</span>
+                    </div>
+                </a>
+                }
+            }
+            </div>
+            @{
+                if(news.Count>0)
+                {
+                      <ul class="pager-a">
                 <li class="previous">
-                    <a href="#">&lt;上一页</a>
+                    <a href="@prev">&lt;上一页</a>
                 </li>
 
                 <li class="next">
-                    <a href="#">下一页 &gt;</a>
+                    <a href="@next">下一页 &gt;</a>
                 </li>
             </ul>
+                }
+            }          
         </div>
-        
-        <div class="span8 well clearfix">
-            <div class=" hero-unit">
+           <div class="loading" id="loading">
+                <img src="/img/loading-big.gif" />
             </div>
-            <div class="row-fluid">
-                <div class="thumbnail span5 ">
-                    <img src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                </div>
-                <div class="span7">
-                    <ul class="thumbnails  row-fluid">
-                        <li class="span3">
-                            <div class="thumbnail  list_img">
-                                <img src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                            </div>
-                        </li>
-                        <li class="span3">
-                            <div class="thumbnail ">
-                                <img src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                            </div>
-                        </li>
-                        <li class="span3">
-                            <div class="thumbnail ">
-                                <img src="http://pic20.nipic.com/20120401/7656708_133354207138_2.jpg" alt="">
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <div class="span8" id="news_content">
+       
         </div>
         <!--/span-->
     </div>
@@ -101,3 +64,4 @@
 </div>
 <!--/.fluid-container-->
 
+<script src="/js/news.js"></script>

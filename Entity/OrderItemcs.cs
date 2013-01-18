@@ -15,6 +15,7 @@ namespace TextileCity.Entity
 		private int _id;
 		private int _order_id;
 		private int _material_id;
+        
 		private int _count;
 		private string _state;
 		private string _type;
@@ -50,6 +51,12 @@ namespace TextileCity.Entity
 			set{ _material_id=value;}
 			get{return _material_id;}
 		}
+
+        public string MaterialName
+        {
+            get;
+            set;
+        }
 		/// <summary>
 		/// 
 		/// </summary>

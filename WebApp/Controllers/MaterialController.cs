@@ -30,6 +30,7 @@ namespace WebApp.Controllers
                         {
                             ViewData["CategoryName"] = category.Name;
                         }
+                        ViewBag.Title = material.Name;
                         string categoryUrl = "fabric";
                         switch (material.CategoryType)
                         {
@@ -61,7 +62,7 @@ namespace WebApp.Controllers
                             }
                             ViewData["Images"] = imageList;
                         }
-
+                        
                         return View("material");
                     }
                     else

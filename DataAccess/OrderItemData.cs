@@ -219,56 +219,60 @@ namespace TextileCity.DataAccess
             OrderItem model = new OrderItem();
             if (row != null)
             {
-                if (row["id"] != null && row["id"].ToString() != "")
+                foreach (DataColumn col in row.Table.Columns)
                 {
-                    model.ItemID = int.Parse(row["id"].ToString());
-                }
-                if (row["order_id"] != null && row["order_id"].ToString() != "")
-                {
-                    model.OrderID = int.Parse(row["order_id"].ToString());
-                }
-                if (row["material_id"] != null && row["material_id"].ToString() != "")
-                {
-                    model.MaterialID = int.Parse(row["material_id"].ToString());
-                }
-                if (row["count"] != null && row["count"].ToString() != "")
-                {
-                    model.Count = int.Parse(row["count"].ToString());
-                }
-                model.State=row["state"].ToString();
-                model.Type=row["type"].ToString();
-                if (row["total_price"] != null && row["total_price"].ToString() != "")
-                {
-                    model.Total = decimal.Parse(row["total_price"].ToString());
-                }
-                if (row["style_id"] != null && row["style_id"].ToString() != "")
-                {
-                    model.StyleID = int.Parse(row["style_id"].ToString());
-                }
-                if (row["style_name"] != null)
-                {
-                    model.StyleName = row["style_name"].ToString();
-                }
-                if (row["craft"] != null && row["craft"].ToString() != "")
-                {
-                    model.CraftID = int.Parse(row["craft"].ToString());
-                }
-                if (row["add_time"] != null && row["add_time"].ToString() != "")
-                {
-                    model.AddTime = DateTime.Parse(row["add_time"].ToString());
-                }
-                if (row["delivery_time"] != null && row["delivery_time"].ToString() != "")
-                {
-                    model.DeliveryTime = DateTime.Parse(row["delivery_time"].ToString());
-                }
-                if (row["remark"] != null)
-                {
-                    model.Remark = row["remark"].ToString();
-                }
-                if (row["delivery_remark"] != null)
-                {
-                    model.DeliveryRemark = row["delivery_remark"].ToString();
-                }
+                    if (row[col] != null && row[col].ToString() != "")
+                    {
+                        switch (col.ColumnName)
+                        {
+                            case "id":
+                                model.ItemID = int.Parse(row[col].ToString());
+                                break;
+                            case "order_id":
+                                model.OrderID = int.Parse(row[col].ToString());
+                                break;
+                            case "material_id":
+                                model.MaterialID =  int.Parse(row[col].ToString());
+                                break;
+                            case "material_name":
+                                model.MaterialName = row[col].ToString();
+                                break;
+                            case "count":
+                                model.Count = int.Parse(row[col].ToString());
+                                break;
+                            case "state":
+                                model.State = row[col].ToString();
+                                break;
+                            case "type":
+                                  model.Type = row[col].ToString();
+                                break;
+                            case "total_price":
+                                model.Total = decimal.Parse(row[col].ToString());
+                                break;
+                            case "style_id":
+                                model.StyleID =  int.Parse(row[col].ToString());
+                                break;
+                            case "style_name":
+                                model.StyleName = row[col].ToString();
+                                break;
+                            case "craft":
+                                model.CraftID = int.Parse(row[col].ToString());
+                                break;
+                            case "add_time":
+                                 model.AddTime = DateTime.Parse(row[col].ToString());
+                                break;
+                            case "delivery_time":
+                                 model.DeliveryTime = DateTime.Parse(row[col].ToString());
+                                break;
+                            case "remark":
+                                 model.Remark =row[col].ToString();
+                                break;
+                            case "delivery_remark":
+                                 model.DeliveryRemark = row[col].ToString();
+                                break;
+                        }
+                    }
+                }                                      
             }
             return model;
         }
@@ -285,6 +289,16 @@ namespace TextileCity.DataAccess
             {
                 strSql.Append(" where " + strWhere);
             }
+            return MysqlHelper.ExecuteDataSet(strSql.ToString());
+        }
+
+        public DataSet GetItems(int orderId)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select order_item.id,material_id,count,state,order_item.type,total_price,style_id,style_name,craft,material.`name` as material_name ");
+            strSql.Append(" FROM order_item left JOIN material ON order_item.material_id = material.id  ");
+            strSql.AppendFormat(" where order_id={0} " ,orderId);
+            strSql.Append(" order by add_time desc ");
             return MysqlHelper.ExecuteDataSet(strSql.ToString());
         }
 

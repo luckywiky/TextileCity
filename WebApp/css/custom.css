@@ -1150,3 +1150,23 @@ padding: 8px 15px !important;
 .index div{
     padding:5px 0;
 }
+.news h2{
+    color:#890000;
+}
+.news{
+    color:#222;
+}
+
+.mar-t4{
+    margin-top:3px;
+}
+.order-info p{
+    color:#222;
+    font-size:16px;
+    
+}
+.order-info span{
+    color:#890000;
+     font-weight:normal;
+     margin-right:35px;
+}
