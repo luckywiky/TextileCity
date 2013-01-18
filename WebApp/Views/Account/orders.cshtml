@@ -6,7 +6,7 @@
 @{
     string[] leftNaviCss = new string[5] { "", "", "", "", "" };
     int navi = 0;
-    if(ViewData["Navi"]!=null)
+    if (ViewData["Navi"] != null)
     {
         navi = (int)ViewData["Navi"];
     }
@@ -39,6 +39,11 @@
                 <div class="well ">
                     @{
                         List<Order> orders = new List<Order>();
+                        List<PagerItem> pagerItems = new List<PagerItem>();
+                        if (ViewData["PagerItems"] != null)
+                        {
+                            pagerItems = ViewData["PagerItems"] as List<PagerItem>;
+                        }
                         if (ViewData["Orders"] != null)
                         {
                             orders = ViewData["Orders"] as List<Order>;
@@ -85,6 +90,34 @@
 
                             </tbody>
                         </table>
+                        <div class="pagination pagination-centered " id="list_pager">
+                            <ul>
+                                @{
+                            if (pagerItems.Count > 3)
+                            {
+                                foreach (PagerItem item in pagerItems)
+                                {
+                                    if (item.Display)
+                                    {
+                                        if (item.Active)
+                                        {
+                                    <li class="active"><a>@item.Text</a></li>
+                                        }
+                                        else
+                                        {
+                                    <li><a href="@string.Format("/account/orders/{0}?page={1}", ViewData["Type"].ToString(), item.Index)">@item.Text</a></li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                    <li class="disabled"><a>@item.Text</a></li>
+                                    }
+                                }
+                            }
+                                }
+
+                            </ul>
+                        </div>
                         }
                     }
 

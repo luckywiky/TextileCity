@@ -46,6 +46,7 @@
     <Compile Include="CategoryCollection.cs" />
     <Compile Include="CategoryType.cs" />
     <Compile Include="Craft.cs" />
+    <Compile Include="DeliveryType.cs" />
     <Compile Include="Material.cs" />
     <Compile Include="News.cs" />
     <Compile Include="Order.cs" />

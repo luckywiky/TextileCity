@@ -50,6 +50,11 @@ namespace TextileCity.Models
             get;
             set;
         }
+        public string Delivery
+        {
+            get;
+            set;
+        }
 
         public decimal TotalPrice
         {
@@ -234,14 +239,13 @@ namespace TextileCity.Models
             Order order = new Order();
             order.Uid = uid;
             order.OrderState = OrderState.MakingUp;
-            DateTime now = DateTime.Now;
-            order.Number = string.Format("{0}{1}{2}{3}{4}{5}{6}{7}", uid, now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, now.Millisecond);
+            order.Number = GetNumber();
             order.Total = TotalPrice;
             order.Address = Address;
             order.AddTime = DateTime.Now;
             order.LinkMan = LinkMan;
             order.Phone = Phone;
-
+            order.Delivery = Delivery;
             OrderOperation orderop = new OrderOperation();
             int orderid = orderop.Add(order);
             int rows =0;
@@ -266,6 +270,14 @@ namespace TextileCity.Models
                 }
             }
             return result;
+        }
+
+        public string GetNumber()
+        {
+            OrderOperation orderop = new OrderOperation();
+            int n = orderop.GetTodayCount()+1;
+            string number = string.Format("{0}{1}", DateTime.Now.ToString("yyyyMMddHHmmss"), n.ToString("00000"));
+            return number;
         }
     }
 

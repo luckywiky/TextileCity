@@ -971,6 +971,12 @@ div.navigation a img {
 
 table,tr,td,th,thead {
      color:#890000;
+     font-size:14px;
+     line-height:32px;
+}
+td{
+    color:#890000;
+
 }
 
 .cart-header {

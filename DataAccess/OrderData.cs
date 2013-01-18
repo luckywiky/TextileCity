@@ -37,9 +37,9 @@ namespace TextileCity.DataAccess
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into tc_order(");
-            strSql.Append("uid,number,total_price,address,phone,linkman,add_time,delivery_time,remark,delivery_remark,`state`)");
+            strSql.Append("uid,number,total_price,address,phone,linkman,add_time,delivery_time,remark,delivery,`state`)");
             strSql.Append(" values (");
-            strSql.Append("?uid,?number,?total_price,?address,?phone,?linkman,?add_time,?delivery_time,?remark,?delivery_remark,?state);");
+            strSql.Append("?uid,?number,?total_price,?address,?phone,?linkman,?add_time,?delivery_time,?remark,?delivery,?state);");
             strSql.Append(" select LAST_INSERT_ID() ");
             MySqlParameter[] parameters = {
 					new MySqlParameter("?uid", MySqlDbType.Int32,10),
@@ -51,7 +51,7 @@ namespace TextileCity.DataAccess
 					new MySqlParameter("?add_time", MySqlDbType.DateTime),
 					new MySqlParameter("?delivery_time", MySqlDbType.DateTime),
 					new MySqlParameter("?remark", MySqlDbType.Text),
-					new MySqlParameter("?delivery_remark", MySqlDbType.Text),
+					new MySqlParameter("?delivery", MySqlDbType.Enum),
                     new MySqlParameter("?state", MySqlDbType.Enum)};
             parameters[0].Value = model.Uid;
             parameters[1].Value = model.Number;
@@ -62,12 +62,12 @@ namespace TextileCity.DataAccess
             parameters[6].Value = model.AddTime;
             parameters[7].Value = model.DeliveryTime;
             parameters[8].Value = model.Remark;
-            parameters[9].Value = model.DeliveryRemark;
+            parameters[9].Value = model.Delivery;
             parameters[10].Value = model.OrderState;
 
             object obj = MysqlHelper.ExecuteScalar(strSql.ToString(), parameters);
             int id = 0;
-            if (obj !=null)
+            if (obj != null)
             {
                 id = int.Parse(obj.ToString());
             }
@@ -89,7 +89,7 @@ namespace TextileCity.DataAccess
             strSql.Append("add_time=?add_time,");
             strSql.Append("delivery_time=?delivery_time,");
             strSql.Append("remark=?remark,");
-            strSql.Append("delivery_remark=?delivery_remark");
+            strSql.Append("delivery=?delivery");
             strSql.Append("`state`=?state");
             strSql.Append(" where id=?id");
             MySqlParameter[] parameters = {
@@ -102,7 +102,7 @@ namespace TextileCity.DataAccess
 					new MySqlParameter("?add_time", MySqlDbType.DateTime),
 					new MySqlParameter("?delivery_time", MySqlDbType.DateTime),
 					new MySqlParameter("?remark", MySqlDbType.Text),
-					new MySqlParameter("?delivery_remark", MySqlDbType.Text),
+					new MySqlParameter("?delivery", MySqlDbType.Enum),
                      new MySqlParameter("?state", MySqlDbType.Enum),
 					new MySqlParameter("?id", MySqlDbType.Int32,10)};
             parameters[0].Value = model.Uid;
@@ -114,7 +114,7 @@ namespace TextileCity.DataAccess
             parameters[6].Value = model.AddTime;
             parameters[7].Value = model.DeliveryTime;
             parameters[8].Value = model.Remark;
-            parameters[9].Value = model.DeliveryRemark;
+            parameters[9].Value = model.Delivery;
             parameters[10].Value = model.OrderState;
             parameters[11].Value = model.OrderID;
             int rows = MysqlHelper.ExecuteNonQuery(strSql.ToString(), parameters);
@@ -179,7 +179,7 @@ namespace TextileCity.DataAccess
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select id,uid,`state`,number,total_price,address,phone,linkman,add_time,delivery_time,remark,delivery_remark from tc_order ");
+            strSql.Append("select id,uid,`state`,number,total_price,address,phone,linkman,add_time,delivery_time,remark,delivery from tc_order ");
             strSql.Append(" where id=?id");
             MySqlParameter[] parameters = {
 					new MySqlParameter("?id", MySqlDbType.Int32)
@@ -204,7 +204,7 @@ namespace TextileCity.DataAccess
         /// </summary>
         public Order DataRowToModel(DataRow row)
         {
-           Order model = new Order();
+            Order model = new Order();
             if (row != null)
             {
                 foreach (DataColumn col in row.Table.Columns)
@@ -246,8 +246,8 @@ namespace TextileCity.DataAccess
                             case "remark":
                                 model.Remark = row["remark"].ToString();
                                 break;
-                            case "delivery_remark":
-                                model.DeliveryRemark = row["delivery_remark"].ToString();
+                            case "delivery":
+                                model.Delivery = row["delivery"].ToString();
                                 break;
                         }
                     }
@@ -260,18 +260,18 @@ namespace TextileCity.DataAccess
         /// 获得数据列表
         /// </summary>
         /// 
-        public DataSet GetMinOrders(int uid,int topCount)
+        public DataSet GetMinOrders(int uid, int topCount)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select  id,uid,`state`,number,total_price,add_time,delivery_time ");
             strSql.Append(" FROM tc_order ");
             strSql.AppendFormat(" where uid={0} and (add_time >='{1}' or state='{2}') order by add_time desc ,state asc",
-                uid,DateTime.Now.AddMonths(-1), TextileCity.Entity.OrderState.MakingUp);
+                uid, DateTime.Now.AddMonths(-1), TextileCity.Entity.OrderState.MakingUp);
             strSql.AppendFormat(" LIMIT {0} ", topCount);
             return MysqlHelper.ExecuteDataSet(strSql.ToString());
         }
 
-        public DataSet GetOrders(int uid,int page,int size,out int count)
+        public DataSet GetOrders(int uid, int page, int size, out int count)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select id,uid,`state`,number,total_price,add_time,delivery_time ");
@@ -311,7 +311,7 @@ namespace TextileCity.DataAccess
             StringBuilder strCountSql = new StringBuilder();
             strCountSql.Append("select Count(id) ");
             strCountSql.Append(" FROM tc_order ");
-            strCountSql.AppendFormat(" where uid={0} and state='{1}' ", uid,state);
+            strCountSql.AppendFormat(" where uid={0} and state='{1}' ", uid, state);
             count = 0;
             object obj = MysqlHelper.ExecuteScalar(strCountSql.ToString());
             if (obj != null)
@@ -324,7 +324,7 @@ namespace TextileCity.DataAccess
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select id,uid,`state`,number,total_price,address,phone,linkman,add_time,delivery_time,remark,delivery_remark ");
+            strSql.Append("select id,uid,`state`,number,total_price,address,phone,linkman,add_time,delivery_time,remark,delivery ");
             strSql.Append(" FROM tc_order ");
             if (strWhere.Trim() != "")
             {
@@ -345,6 +345,27 @@ namespace TextileCity.DataAccess
                 strSql.Append(" where " + strWhere);
             }
             object obj = MysqlHelper.ExecuteScalar(strSql.ToString());
+            if (obj == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(obj);
+            }
+        }
+
+        public int GetRecordCount(DateTime date)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select count(1) FROM tc_order ");
+            strSql.Append(" where add_time>=?start and add_time<?end ");
+            MySqlParameter[] parameters = {
+                                new MySqlParameter("?start", MySqlDbType.DateTime),
+                                new MySqlParameter("?end", MySqlDbType.DateTime)};
+            parameters[0].Value = date.Date;
+            parameters[1].Value = date.Date.AddDays(1);
+            object obj = MysqlHelper.ExecuteScalar(strSql.ToString(),parameters);
             if (obj == null)
             {
                 return 0;

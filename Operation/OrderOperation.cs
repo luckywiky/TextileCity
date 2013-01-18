@@ -175,6 +175,18 @@ namespace TextileCity.Operation
 		{
 			return dal.GetRecordCount(strWhere);
 		}
+
+
+
+        public int GetTodayCount()
+        {
+            return GetDateCount(DateTime.Now.Date);
+        }
+
+        public int GetDateCount(DateTime date)
+        {
+            return dal.GetRecordCount(date.Date);
+        }
 		/// <summary>
 		/// 分页获取数据列表
 		/// </summary>

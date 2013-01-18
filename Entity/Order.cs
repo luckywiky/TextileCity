@@ -22,7 +22,7 @@ namespace TextileCity.Entity
         private DateTime _add_time=DateTime.Now;
         private DateTime _delivery_time;
         private string _remark=string.Empty;
-        private string _delivery_remark=string.Empty;
+        private string _delivery=DeliveryType.Take;
         private string _state = string.Empty;
 
         public string OrderState
@@ -113,10 +113,10 @@ namespace TextileCity.Entity
         /// <summary>
         /// 
         /// </summary>
-        public string DeliveryRemark
+        public string Delivery
         {
-            set { _delivery_remark = value; }
-            get { return _delivery_remark; }
+            set { _delivery = value; }
+            get { return _delivery; }
         }
         #endregion Model
 

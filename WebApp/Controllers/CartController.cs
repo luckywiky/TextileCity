@@ -195,7 +195,12 @@ namespace WebApp.Controllers
                     MyCart.Phone = form["input-phone"];
                     if (form["delivery-type"] == "2")
                     {
+                        MyCart.Delivery = DeliveryType.Express;
                         MyCart.Address = form["input-address"];
+                    }
+                    else
+                    {
+                        MyCart.Delivery = DeliveryType.Take;
                     }
                     if (MyCart.SaveToDB())
                     {

@@ -223,8 +223,7 @@ namespace WebApp.Controllers
                                 int count = 0;
                                 orders = oop.GetOrders(loginUser.Uid, page, 10, out count);
                                 Pager pager = new Pager(page, count, 10);
-                                pager.CreatePager();
-                                ViewData["Pager"] = pager;
+                                ViewData["PagerItems"] = pager.CreatePager();
                             }
                             else
                             {
@@ -242,8 +241,8 @@ namespace WebApp.Controllers
                                 int count = 0;
                                 orders = oop.GetOrders(loginUser.Uid, type, page, 10, out count);
                                 Pager pager = new Pager(page, count, 10);
-                                pager.CreatePager();
-                                ViewData["Pager"] = pager;
+                               
+                                ViewData["PagerItems"] = pager.CreatePager();
                             }
                             else
                             {
@@ -257,8 +256,8 @@ namespace WebApp.Controllers
                                 int count = 0;
                                 orders = oop.GetOrders(loginUser.Uid, type, page, 10, out count);
                                 Pager pager = new Pager(page, count, 10);
-                                pager.CreatePager();
-                                ViewData["Pager"] = pager;
+                                
+                                ViewData["PagerItems"] = pager.CreatePager();
                             }
                             else
                             {
@@ -272,8 +271,8 @@ namespace WebApp.Controllers
                                 int count = 0;
                                 orders = oop.GetOrders(loginUser.Uid, type, page, 10, out count);
                                 Pager pager = new Pager(page, count, 10);
-                                pager.CreatePager();
-                                ViewData["Pager"] = pager;
+                                
+                                ViewData["PagerItems"] = pager.CreatePager();
                             }
                             else
                             {
@@ -287,8 +286,8 @@ namespace WebApp.Controllers
                 }
                 catch(Exception ex)
                 {
-                    throw ex;
-                   // return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
+                    
+                    return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
                 }
                 ViewBag.NaviCss.Current = TextileCity.Models.Navigation.Account;
                 return View();
