@@ -51,14 +51,14 @@
                             items = ViewData["Items"] as List<OrderItem>;
                         }   
                           <div class="page-header  cart-header" style="margin-bottom:15px">
-                    <h4>物料列表<small style="padding-left:25px">共<em>@items.Count</em>件</small></h4>
+                    <h4>物料列表<small style="padding-left:25px">共<em>@items.Count</em>件<span></span>总价：<span>@dataModel.Total.ToString("G")</span></small></h4>
                 </div>                                     
                         <table class="table table-striped ">
                             <thead>
                                 <tr>
                                     <th class="span2">物料</th>
                                     <th class="span1">数量</th>
-                                    <th class="span1">总价</th>
+                                    <th class="span1">小计</th>
                                     <th class="span1">类别</th>
                                     <th class="span1">样式</th>
                                     <th class="span1">工艺</th>
